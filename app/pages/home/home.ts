@@ -15,7 +15,7 @@ export class HomePage {
   }
 
   presentInfoModal() {
-    this.navController.present(Modal.create(InfoModal));
+    this.navController.present(Modal.create(InfoModal, {roomName: '1'}));
   }
 }
 

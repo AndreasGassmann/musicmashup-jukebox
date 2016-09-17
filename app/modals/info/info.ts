@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController } from 'ionic-angular';
+import { ViewController, NavParams } from 'ionic-angular';
 import { QRCodeComponent } from 'ng2-qrcode';
 import { SocialSharing } from 'ionic-native';
 
@@ -10,8 +10,8 @@ import { SocialSharing } from 'ionic-native';
 export class InfoModal {
   roomName: string;
 
-  constructor(private viewCtrl: ViewController) {
-    this.roomName = '1';
+  constructor(private viewCtrl: ViewController, private _navParams: NavParams) {
+    this.roomName = this._navParams.get("roomName");
   }
 
   share() {

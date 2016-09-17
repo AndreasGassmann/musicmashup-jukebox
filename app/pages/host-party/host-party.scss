@@ -4,11 +4,15 @@
   background-image: url('../assets/background-landing.jpg');
   background-size: cover;
   background-position: center;
+
   .transparent {
     color:#ffffff!important;
     background-color:transparent;
   }
   .beacon-icon {
     font-size: 3em;
+  }
+  input::-webkit-input-placeholder {
+    color:    #ffffff;
   }
 }

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import {YoutubeService} from "../../providers/youtube-service";
 import {YoutubeVideo} from "../../classes/YoutubeVideo";
+import {Video} from "../../classes/Video";
+import {NavOptions} from "ionic-angular/index";
 
 /*
   Generated class for the SearchPage page.
@@ -38,7 +40,14 @@ export class SearchPage {
   }
 
   itemClicked(item:YoutubeVideo){
-    alert(item.snippet.title);
+
+    var video = new Video();
+    video.title = item.snippet.title;
+    video.datetime_added = new Date();
+    video.played = false;
+    video.thumbUrl = item.snippet.thumbnails.default.url;
+    video.url = "https://www.youtube.com/embed/" + item.id;
+
   }
 
 }

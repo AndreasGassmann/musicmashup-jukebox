@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button primary (click)="dismiss()">
+        Cancel
+      </button>
+    </ion-buttons>
+    Room Info
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="info">
+  <div>
+    <qrcode [qrdata]="'My QR code data string'" [size]="256" [level]="'M'"></qrcode>
+  </div>
+</ion-content>

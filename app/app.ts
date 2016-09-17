@@ -4,6 +4,7 @@ import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
 import { LandingPage } from './pages/landing/landing';
 import {BeaconService} from "./providers/beacon-service";
+import {WebSocketService} from "./providers/websocket-service";
 
 declare var evothings: any;
 
@@ -44,4 +45,4 @@ export class MyApp {
   }
 }
 
-ionicBootstrap(MyApp, [BeaconService]);
+ionicBootstrap(MyApp, [BeaconService, WebSocketService]);

@@ -1,16 +1,63 @@
 import { Injectable } from '@angular/core';
 import { Storage, LocalStorage } from 'ionic-angular';
-
-declare var cordova: any;
+import { IBeacon } from 'ionic-native';
+import { Delegate, BeaconRegion } from "ionic-native/dist/index";
 
 @Injectable()
 export class BeaconService {
+    delegate: Delegate;
+    region: BeaconRegion;
 
     constructor() {
+        // Request permission to use location on iOS
+        IBeacon.requestAlwaysAuthorization();
+        // create a new delegate and register it with the native layer
+        this.delegate = IBeacon.Delegate();
+    }
 
+    startScanning() {
+        // Subscribe to some of the delegate's event handlers
+        this.delegate.didRangeBeaconsInRegion()
+            .subscribe(
+                data => console.log('didRangeBeaconsInRegion: ', data),
+                error => console.error()
+            );
+        this.delegate.didStartMonitoringForRegion()
+            .subscribe(
+                data => console.log('didStartMonitoringForRegion: ', data),
+                error => console.error()
+            );
+        this.delegate.didEnterRegion()
+            .subscribe(
+                data => {
+                    console.log('didEnterRegion: ', data);
+                }
+            );
+
+        let beaconRegion = IBeacon.BeaconRegion('MusicMashupBeacon','00000000-0000-0000-0000-000000000000');
+
+        IBeacon.startMonitoringForRegion(beaconRegion)
+            .then(
+                () => console.log('Native layer recieved the request to monitoring'),
+                error => console.error('Native layer failed to begin monitoring: ', error)
+            );
+    }
+
+    isBluetoothEnabled() {
+        return IBeacon.isBluetoothEnabled();
     }
 
     createLocalBeacon() {
+
+        this.region = IBeacon.BeaconRegion('MusicMashupBeacon', '00000000-0000-0000-0000-000000000000', 5, 2000, true)
+
+        IBeacon.startAdvertising(this.region, 100).then(
+            (data) => {
+                console.log('Started advertising');
+                console.log(data);
+            }
+        );
+        /*
         var uuid = '00000000-0000-0000-0000-000000000000';
         var identifier = 'advertisedBeacon';
         var minor = 2000;
@@ -50,12 +97,15 @@ export class BeaconService {
                 }
             })
             .fail(function(e) { console.error(e); })
-            .done();
+            .done();*/
     }
 
     deactivateLocalBeacon() {
+        IBeacon.stopAdvertising(this.region);
+
+        /*
         cordova.plugins.locationManager.stopAdvertising()
             .fail(function(e) { console.error(e); })
-            .done();
+            .done();*/
     }
 }

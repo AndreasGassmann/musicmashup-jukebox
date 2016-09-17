@@ -35,4 +35,5 @@
     <plugin name="cordova-plugin-statusbar" spec="~2.1.3" />
     <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
     <plugin name="com.mirasense.scanditsdk.plugin" spec="libs/scandit-barcodescanner-community-phonegap_4.16.1" />
+    <plugin name="cordova-plugin-eddystone" spec="~1.3.0" />
 </widget>

@@ -3,33 +3,35 @@
 </ion-navbar>
 
 <ion-content padding class="chat">
-<!--
-    <ion-row *ngFor="let message of messages" class="message-wrap">
-      <ion-col width-10 >
-          <ion-icon class="avatar" name="person"></ion-icon>
-      </ion-col>
-      <ion-col width-90>
-        <div class="triangle-left"></div>
-        <ion-col class="message" >
-            {{message.message}}
-          </ion-col>
-          <ion-col>
-            <span class="muted small">{{message.name}}{{message.timestamp}}</span>
-          </ion-col>
-      </ion-col>
-    </ion-row>
--->
 
     <ion-row *ngFor="let message of messages" class="message-wrap">
-        <ion-col width-90 offset-10>
+    </ion-row>
+
+
+    <ion-row *ngFor="let message of messages" class="message-wrap">
+        <ion-col width-90 offset-10 *ngIf="message.isOwnMessage">
             <div class="triangle-right"></div>
             <ion-col class="message-own" >
                 {{message.message}}
             </ion-col>
             <ion-col offset-50>
-                <span class="muted small">{{message.name}}{{message.timestamp}}</span>
+                <span class="muted small">{{message.userName}}{{message.timestamp}}</span>
             </ion-col>
         </ion-col>
+
+      <ion-col width-10 *ngIf="!message.isOwnMessage">
+        <ion-icon class="avatar" name="person"></ion-icon>
+      </ion-col>
+      <ion-col width-90 *ngIf="!message.isOwnMessage">
+        <div class="triangle-left"></div>
+        <ion-col class="message" >
+          {{message.message}}
+        </ion-col>
+        <ion-col>
+          <span class="muted small">{{message.userName}} {{message.timestamp | date:'d.m.y'}}</span>
+        </ion-col>
+      </ion-col>
+
     </ion-row>
 
     <ion-row class="events message-wrap" *ngFor="let event of events">
@@ -38,4 +40,15 @@
           <span primary>{{event.videoName}}</span>
     </ion-row>
 
+
+
 </ion-content>
+
+<ion-footer>
+  <ion-item>
+    <ion-input placeholder="Text Input"></ion-input>
+    <button secondary fab fab-bottom fab-right (click)="goToTabsPage()">
+      <ion-icon name="send"></ion-icon>
+    </button>
+  </ion-item>
+</ion-footer>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { TabsPage } from '../tabs/tabs';
 
 /*
   Generated class for the JoinPartyPage page.
@@ -12,4 +13,8 @@ import { NavController } from 'ionic-angular';
 })
 export class JoinPartyPage {
   constructor(private nav: NavController) {}
+
+  goToTabsPage() {
+    this.nav.setRoot(TabsPage);
+  }
 }

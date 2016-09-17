@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import {YoutubeVideoResponse} from "../classes/YoutubeVideo";
 
@@ -6,7 +6,7 @@ import {YoutubeVideoResponse} from "../classes/YoutubeVideo";
 @Injectable()
 export class YoutubeService {
 
-    constructor(@Inject(Http) private http:Http) {
+    constructor(private http:Http) {
 
     }
 

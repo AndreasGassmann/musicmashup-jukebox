@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { BarcodeService } from "../../providers/barcode-service";
 import { HostPartyPage } from '../host-party/host-party';
+import { JoinPartyPage } from '../join-party/join-party';
 
 
 /*
@@ -28,6 +29,9 @@ export class LandingPage {
     }
   goToHostPartyPage() {
     this.nav.push(HostPartyPage);
+  }
+  goToJoinPartyPage() {
+    this.nav.push(JoinPartyPage);
   }
 
 }

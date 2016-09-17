@@ -4,7 +4,10 @@
   background-image: url('../assets/background-landing.jpg');
   background-size: cover;
   background-position: center;
-
+  .transparent {
+    color:#ffffff!important;
+    background-color:transparent;
+  }
   .logo-placeholder {
     height: 96px;
     width: 96px;

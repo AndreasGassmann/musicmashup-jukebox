@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Storage, LocalStorage } from 'ionic-angular';
-import { Platform } from "ionic-angular";
 
 declare var Scandit: any;
 
@@ -8,23 +7,16 @@ declare var Scandit: any;
 export class BarcodeService {
     picker: any;
 
-    constructor(private platform: Platform) {
-        if (!this.platform.is('core')) {
+    constructor() {
+        if (!this.platform.is('core') || typeof Scandit !== 'undefined') {
             Scandit.License.setAppKey("ceKIGYn3xZidfbLaDQvWRxE90mlLjhxRqTj/8Q7dGko");
-
             var settings = new Scandit.ScanSettings();
-            settings.setSymbologyEnabled(Scandit.Barcode.Symbology.EAN13, true);
-            settings.setSymbologyEnabled(Scandit.Barcode.Symbology.UPC12, true);
-            settings.setSymbologyEnabled(Scandit.Barcode.Symbology.EAN8, true);
-// Instantiate the barcode picker by using the settings defined above.
+            settings.setSymbologyEnabled(Scandit.Barcode.Symbology.QR, true);
             this.picker = new Scandit.BarcodePicker(settings);
-
-            console.log(this.picker);
         }
     }
 
     openScanner() {
-        if (!this.platform.is('core')) {
             this.picker.show(function success(session) {
                     alert("Scanned " + session.newlyRecognizedCodes[0].symbology + " code: " + session.newlyRecognizedCodes[0].data);
                     // If you are using continuous scanning you might want to stop here. Please note that
@@ -41,6 +33,5 @@ export class BarcodeService {
                     if (error != "Canceled") alert("Failed: " + error);
                 });
             this.picker.startScanning();
-        }
     }
 }

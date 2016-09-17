@@ -37,7 +37,7 @@ export class BarcodeService {
             },
 
             function failure(error) {
-                alert("Failed: " + error);
+                if(error != "Canceled") alert("Failed: " + error);
             });
         this.picker.startScanning();
     }

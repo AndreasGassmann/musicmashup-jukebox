@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {Platform, ionicBootstrap} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
+import { LandingPage } from './pages/landing/landing';
+
 
 declare var evothings: any;
 declare var cordova: any;
@@ -14,7 +16,7 @@ export class MyApp {
   private rootPage:any;
 
   constructor(private platform:Platform) {
-    this.rootPage = TabsPage;
+    this.rootPage = LandingPage;
 
     platform.ready().then(() => {
 /*

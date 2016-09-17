@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { BarcodeService } from "../../providers/barcode-service";
+import { HostPartyPage } from '../host-party/host-party';
 
 
 /*
@@ -25,5 +26,8 @@ export class LandingPage {
     goToTabsPage() {
       this.nav.setRoot(TabsPage);
     }
+  goToHostPartyPage() {
+    this.nav.push(HostPartyPage);
+  }
 
 }

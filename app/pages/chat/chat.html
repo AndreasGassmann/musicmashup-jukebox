@@ -47,9 +47,10 @@
 <ion-footer keyboard-attach class="bar-stable item-input-inset">
     <ion-row>
         <ion-col width-80>
-            <label class="item-input-wrapper">
-                <input class="input-msg" type="text" placeholder="Type your message" on-return="sendMessage(); closeKeyboard()" ng-model="data.message" on-focus="inputUp()" on-blur="inputDown()" />
-            </label>
+            <ion-label class="item-input-wrapper">
+                <ion-input class="input-msg" type="text" placeholder="Type your message" on-return="sendMessage(); closeKeyboard()" ng-model="data.message" on-focus="inputUp()" on-blur="inputDown()">
+                    </ion-input>
+            </ion-label>
         </ion-col>
         <ion-col width-20>
             <button class="button button-clear" ng-click="sendMessage()">

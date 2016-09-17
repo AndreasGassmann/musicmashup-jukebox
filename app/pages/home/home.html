@@ -3,14 +3,32 @@
 </ion-navbar>
 
 <ion-content padding class="home">
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>app/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xt0Wbb4BVmI" frameborder="0" allowfullscreen></iframe>
+  <ion-list>
+    <ion-item>
+    <ion-row>
+      <ion-col width-20>
+        <img src="../assets/background-landing.jpg"/>
+      </ion-col>
+      <ion-col width-60>
+        <h3>Kygo - Stay (Lyric Video) ft. ...</h3>
+        <span>04:03</span>
+        <ion-row>
+          <ion-col>
+            <img class="profilesmall" src="../assets/background-landing.jpg"/>
+            <span>Pascal Brun</span>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col width-20>
+        <ion-icon name="add"></ion-icon>
+        <span>12</span>
+        <ion-icon name="add"></ion-icon>
+      </ion-col>
+    </ion-row>
+    </ion-item>
+  </ion-list>
+
+  <button secondary fab fab-bottom fab-right (click)="goToTabsPage()">
+    <ion-icon name="add"></ion-icon>
+  </button>
 </ion-content>

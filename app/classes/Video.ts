@@ -2,6 +2,7 @@ import {JukeboxUser} from "./JukeboxUser";
 import {Room} from "./Room";
 export class Video {
   id:number;
+  title:string;
   url:string;
   thumbUrl:string;
   user:JukeboxUser;

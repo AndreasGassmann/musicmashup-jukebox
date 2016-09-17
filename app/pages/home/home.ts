@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {NavController, Modal} from 'ionic-angular';
+import {InfoModal} from "../../modals/info/info";
 import {SearchPage} from "../search/search";
 
 @Component({
@@ -11,6 +12,10 @@ export class HomePage {
 
   public goToSearchPage(){
     this.navController.push(SearchPage);
+  }
+
+  presentInfoModal() {
+    this.navController.present(Modal.create(InfoModal, {roomName: '1'}));
   }
 }
 

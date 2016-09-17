@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button primary (click)="dismiss()">
+        Cancel
+      </button>
+    </ion-buttons>
+    Room Info
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="info">
+
+  Room name: {{roomName}}
+  <div>
+    <qrcode [qrdata]="roomName" [size]="256" [level]="'M'"></qrcode>
+  </div>
+
+  <button (click)="share()">Share</button>
+
+</ion-content>

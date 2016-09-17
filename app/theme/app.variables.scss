@@ -32,9 +32,20 @@ $colors: (
   light:      #f4f4f4,
   dark:       #222,
   favorite:   #69BB7B,
-  muted: rgba(0,0,0,0.38)
+  muted: rgba(0,0,0,0.38),
+  shadow: rgba(0,0,0,0.12),
+
 );
 
 .muted {
   color: color($colors, muted);
+}
+ion-footer {
+  border-top: 1px solid color($colors, shadow);
+  input, span {
+    padding-left: 16px;
+  }
+  input {
+    margin-top: 8px;
+  }
 }

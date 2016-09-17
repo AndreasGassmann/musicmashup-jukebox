@@ -4,8 +4,7 @@ import { TabsPage } from '../tabs/tabs';
 import { BarcodeService } from "../../providers/barcode-service";
 import { HostPartyPage } from '../host-party/host-party';
 import { JoinPartyPage } from '../join-party/join-party';
-import {WebSocketService} from "../../providers/websocket-service";
-
+import { WebSocketService } from "../../providers/websocket-service";
 
 /*
   Generated class for the LandingPage page.

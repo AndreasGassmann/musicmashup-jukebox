@@ -8,8 +8,8 @@
   <ion-title>search</ion-title>
 </ion-navbar>
 
-<ion-searchbar
-        [(ngModel)]="searchInput"
+<ion-searchbar class="4dp-elevation"
+               [(ngModel)]="searchInput"
         [showCancelButton]="shouldShowCancel"
         (ionInput)="onInput($event)"
         (ionCancel)="onCancel($event)" primary>

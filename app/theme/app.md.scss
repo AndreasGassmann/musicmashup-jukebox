@@ -33,3 +33,5 @@
 .tab-button[aria-selected=true] {
   border-bottom: 2px solid color($colors, secondary);
 }
+ion-tabs[primary] tabbar tab-highlight {
+  background: color($colors, secondary); }

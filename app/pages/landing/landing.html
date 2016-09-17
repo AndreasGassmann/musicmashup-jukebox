@@ -26,22 +26,22 @@
     </ion-row>
     <ion-row style="padding-bottom: 12px;">
         <ion-col text-center width-10 offset-20>
-            <ion-icon name="qr-scanner"></ion-icon>
+            <i class="material-icons icon-padding ">filter_tilt_shift</i>
         </ion-col>
         <ion-col width-50>
-            <span>be in proximity of your host and get notified</span>
+            <span>You can be in proximity of your host and get notified.</span>
         </ion-col>
     </ion-row>
     <ion-row>
         <ion-col text-center>
             <button primary (click)="openScanner()">
-                <ion-icon name="qr-scanner"></ion-icon>
+                <ion-icon class="icon-padding" name="qr-scanner"></ion-icon>
                 <span>With QR</span>
             </button>
         </ion-col>
         <ion-col text-center>
             <button primary (click)="goToJoinPartyPage()">
-                <ion-icon name="qr-scanner"></ion-icon>
+                <i class="material-icons icon-padding ">label</i>
                 <span>With ID</span>
             </button>
         </ion-col>
@@ -54,11 +54,8 @@
     </ion-row>
     <ion-col text-center>
         <button primary (click)="goToHostPartyPage()">
-            <ion-icon name="qr-scanner"></ion-icon>
+            <i class="material-icons icon-padding ">add_circle_outline</i>
             <span>Add a room</span>
         </button>
     </ion-col>
-
-    <i class="material-icons">play_arrow</i>
-
 </ion-content>

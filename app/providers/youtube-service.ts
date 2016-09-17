@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import {YoutubeVideoResponse} from "../classes/YoutubeVideo";
 
 
 @Injectable()
 export class YoutubeService {
 
-    constructor(@Inject(Http) http:Http) {
+    constructor(@Inject(Http) private http:Http) {
 
     }
 
-    searchVideo(search:string) {
+    searchVideo(search:string): Promise<YoutubeVideoResponse>{
         return new Promise((resolve, reject) => {
             let params:URLSearchParams = new URLSearchParams();
             params.set('key', "AIzaSyCY6vunaNGae5ava4cmofVIq96Lre8YgOc");
@@ -18,7 +19,7 @@ export class YoutubeService {
             params.set('part', "id,snippet");
             params.set('fields', "items(id,snippet(title,description,thumbnails(default),channelTitle))");
             params.set('q', search);
-            http.get('https://www.googleapis.com/youtube/v3/search', {
+            this.http.get('https://www.googleapis.com/youtube/v3/search', {
                     search: params
                 })
                 .subscribe(data => {
@@ -26,7 +27,7 @@ export class YoutubeService {
                 }, error => {
                     reject(error);
                 });
-        }
+        });
     }
 
 }

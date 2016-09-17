@@ -25,15 +25,15 @@ export class WebSocketService {
 
     isReady:boolean;
     socket:any;
-    listeners:TypedListener[] = [];
+    listeners:TypedListener[];
 
     constructor() {
-
+        this.listeners = [];
     }
 
     connect(id:number) {
         this.isReady = false;
-        this.socket = new WebSocket("wss://musicmashup-jukebox.herokuapp.com/");
+        this.socket = new WebSocket("wss://musicmashup-jukebox.herokuapp.com/" + id + "/");
 
         let self = this;
         this.socket.onopen = function () {
@@ -45,9 +45,9 @@ export class WebSocketService {
         }
 
         this.socket.onmessage = function (e) {
-            for (var i = 0; i < this.listeners.length; i++) {
-                if (this.listeners[i].eventType.toString().toLowerCase() == e.data) {
-                    this.listeners[i].eventListener.onEvent();
+            for (var i = 0; i < self.listeners.length; i++) {
+                if (self.listeners[i].eventType.toString().toLowerCase() == e.data) {
+                    self.listeners[i].eventListener.onEvent();
                 }
             }
         }

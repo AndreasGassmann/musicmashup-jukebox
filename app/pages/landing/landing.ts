@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
+import { BarcodeService } from "../../providers/barcode-service";
 
 
 /*
@@ -11,12 +12,16 @@ import { TabsPage } from '../tabs/tabs';
 */
 @Component({
   templateUrl: 'build/pages/landing/landing.html',
+  providers: [BarcodeService]
 })
 export class LandingPage {
-  constructor(private nav: NavController) {
+  constructor(private nav: NavController, private _barcodeService: BarcodeService) {
 
   }
 
+    openScanner() {
+      this._barcodeService.openScanner();
+    }
     goToTabsPage() {
       this.nav.setRoot(TabsPage);
     }

@@ -7,7 +7,10 @@ declare var cordova: any;
 export class BeaconService {
 
     constructor() {
-/*
+
+    }
+
+    createLocalBeacon() {
         var uuid = '00000000-0000-0000-0000-000000000000';
         var identifier = 'advertisedBeacon';
         var minor = 2000;
@@ -48,6 +51,11 @@ export class BeaconService {
             })
             .fail(function(e) { console.error(e); })
             .done();
-*/
+    }
+
+    deactivateLocalBeacon() {
+        cordova.plugins.locationManager.stopAdvertising()
+            .fail(function(e) { console.error(e); })
+            .done();
     }
 }

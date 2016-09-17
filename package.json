@@ -33,7 +33,10 @@
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
-    "ionic-plugin-keyboard"
+    "ionic-plugin-keyboard",
+    "cordova-plugin-eddystone",
+    "https://github.com/petermetz/cordova-plugin-ibeacon.git",
+    "libs/scandit-barcodescanner-community-phonegap_4.16.1"
   ],
   "cordovaPlatforms": [
     "ios",

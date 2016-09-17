@@ -5,6 +5,7 @@ import {TabsPage} from './pages/tabs/tabs';
 import { LandingPage } from './pages/landing/landing';
 import {BeaconService} from "./providers/beacon-service";
 import {WebSocketService} from "./providers/websocket-service";
+import {SocketService} from './providers/socket-service';
 
 declare var evothings: any;
 
@@ -15,11 +16,15 @@ export class MyApp {
 
   private rootPage:any;
 
-  constructor(private platform:Platform) {
+  constructor(private platform:Platform, public socket: SocketService) {
     this.rootPage = LandingPage;
 
     platform.ready().then(() => {
 
+      this.socket.initialize();
+      this.socket.socketService.subscribe(event => {
+        console.log('message received from server... ', event);
+      });
 
 /*
       function foundBeacon(beacon)
@@ -45,4 +50,4 @@ export class MyApp {
   }
 }
 
-ionicBootstrap(MyApp, [BeaconService, WebSocketService]);
+ionicBootstrap(MyApp, [BeaconService, SocketService, WebSocketService]);

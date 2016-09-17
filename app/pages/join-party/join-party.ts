@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
-import {WebSocketService} from "../../providers/websocket-service";
+import {SocketService} from "../../providers/socket-service";
 
 /*
   Generated class for the JoinPartyPage page.
@@ -13,10 +13,8 @@ import {WebSocketService} from "../../providers/websocket-service";
   templateUrl: 'build/pages/join-party/join-party.html',
 })
 export class JoinPartyPage {
-  constructor(private nav: NavController, private webSocketService: WebSocketService) {
-
-    //this.webSocketService.connect(1);
-
+  constructor(private nav: NavController, private socketService: SocketService) {
+    this.socketService.sendMessage('joinRoom', { id: 1 });
   }
 
   goToTabsPage() {

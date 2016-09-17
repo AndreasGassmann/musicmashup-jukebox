@@ -36,7 +36,7 @@ export class WebSocketService {
 
     connect(id:number) {
         this.isReady = false;
-        this.socket = new WebSocket("wss://musicmashup-jukebox.herokuapp.com/" + id + "/");
+        this.socket = new WebSocket("wss://musicmashup.com:8080/");
 
         let self = this;
         this.socket.onopen = function () {
@@ -50,6 +50,8 @@ export class WebSocketService {
         }
 
         this.socket.onmessage = function (e) {
+
+            alert(e.data);
             for (var i = 0; i < self.listeners.length; i++) {
                 if (self.listeners[i].eventType.toString().toLowerCase() == e.data) {
                     self.listeners[i].eventListener.onEvent();

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Storage, LocalStorage } from 'ionic-angular';
 import { IBeacon } from 'ionic-native';
 import { Delegate, BeaconRegion } from "ionic-native/dist/index";
-
+import { LocalNotifications } from 'ionic-native';
 declare var cordova: any;
 
 @Injectable()
@@ -17,8 +17,20 @@ export class BeaconService {
             IBeacon.requestAlwaysAuthorization();
             // create a new delegate and register it with the native layer
             this.delegate = IBeacon.Delegate();
+
+            this.createLocalNotification();
         }
     }
+
+    createLocalNotification() {
+        console.log("Creating local notification");
+        LocalNotifications.schedule({
+            title: "MusicMashup Room Detected!",
+            text: "There is a MusicMashup room somewhere close to you. Come join it!",
+            at: new Date(),
+            sound: null
+        });
+    };
 
     startScanning() {
         // Subscribe to some of the delegate's event handlers

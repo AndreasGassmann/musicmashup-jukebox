@@ -1,6 +1,16 @@
 .home {
-  .no-padding {
-    padding:0!important;
+  .small {
+    font-size: 0.8em;
   }
-
+  .avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+  }
+  .item {
+    padding-left: 8px:
+  }
+  .item-inner {
+    padding-right:8px!important;
+  }
 }

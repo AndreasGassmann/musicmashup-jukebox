@@ -11,5 +11,35 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'build/pages/chat/chat.html',
 })
 export class ChatPage {
-  constructor(private nav: NavController) {}
+  messages: any;
+  events: any;
+
+  constructor(private nav: NavController) {
+    this.messages = [
+      {
+        id: 1,
+        userName: 'Andy',
+        message: 'Hi',
+        timestamp: Date.now(),
+        avatarUrl: '',
+        isOwnMessage: true
+      },
+      {
+        id: 2,
+        userName: 'Lukas',
+        message: 'Super siite',
+        timestamp: Date.now(),
+        avatarUrl: '',
+        isOwnMessage: false
+      }
+    ];
+
+    this.events = [
+      {
+        userName: "Pascal",
+        action: 'just added',
+        videoName: "Kygo - Stay"
+      }
+    ]
+  }
 }

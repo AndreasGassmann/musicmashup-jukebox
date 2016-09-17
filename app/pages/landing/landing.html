@@ -7,5 +7,53 @@
 
 
 <ion-content padding class="landing">
-    <button primary (click)="goToTabsPage()">Loslegen</button>
+    <ion-row>
+        <ion-col text-center>
+            <div style="height: 32px"></div>
+            <div class="logo-placeholder"></div>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col text-center>
+            <h1>MusicMashUp</h1>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col text-center>
+            <div style="height: 16px"></div>
+            <h3>Join a party</h3>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col text-center>
+            <ion-icon name="qr-scanner"></ion-icon>
+            <span>be in proximity of your host and get notified</span>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col text-center>
+            <button primary (click)="goToTabsPage()">
+                <ion-icon name="qr-scanner"></ion-icon>
+                <span>With QR</span>
+            </button>
+        </ion-col>
+        <ion-col text-center>
+            <button primary (click)="goToTabsPage()">
+                <ion-icon name="qr-scanner"></ion-icon>
+                <span>With ID</span>
+            </button>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col text-center>
+            <div style="height: 32px"></div>
+            <h3>Be a host</h3>
+        </ion-col>
+    </ion-row>
+    <ion-col text-center>
+        <button primary (click)="goToTabsPage()">
+            <ion-icon name="qr-scanner"></ion-icon>
+            <span>Add a room</span>
+        </button>
+    </ion-col>
 </ion-content>

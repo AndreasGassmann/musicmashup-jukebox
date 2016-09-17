@@ -9,7 +9,7 @@ declare var Scandit: any;
 })
 export class HomePage {
   constructor(private navController: NavController) {
-
+/*
       Scandit.License.setAppKey("ceKIGYn3xZidfbLaDQvWRxE90mlLjhxRqTj/8Q7dGko");
 
       var settings = new Scandit.ScanSettings();
@@ -37,6 +37,6 @@ export class HomePage {
             alert("Failed: " + error);
           });
        picker.startScanning();
-
+*/
   }
 }

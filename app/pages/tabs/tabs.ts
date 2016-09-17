@@ -20,6 +20,5 @@ export class TabsPage {
     this.tab2Root = ChatPage;
     this.tab3Root = HistoryPage;
 
-    this.webSocketService.sendMessage("hallo");
   }
 }

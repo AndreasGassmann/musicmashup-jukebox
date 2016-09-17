@@ -32,8 +32,8 @@ export class LandingPage {
     this.nav.push(HostPartyPage);
   }
   goToJoinPartyPage() {
-    this.webSocketService.connect(1);
-    //this.nav.push(JoinPartyPage);
+    //this.webSocketService.connect(1);
+    this.nav.push(JoinPartyPage);
   }
 
 }

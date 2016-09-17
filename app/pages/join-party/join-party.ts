@@ -15,8 +15,7 @@ import {WebSocketService} from "../../providers/websocket-service";
 export class JoinPartyPage {
   constructor(private nav: NavController, private webSocketService: WebSocketService) {
 
-    this.webSocketService.connect(1);
-    console.log('logged');
+    //this.webSocketService.connect(1);
 
   }
 

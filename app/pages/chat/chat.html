@@ -44,11 +44,17 @@
 
 </ion-content>
 
-<ion-footer>
-  <ion-item>
-    <ion-input placeholder="Text Input"></ion-input>
-    <button secondary fab fab-bottom fab-right (click)="goToTabsPage()">
-      <ion-icon name="send"></ion-icon>
-    </button>
-  </ion-item>
+<ion-footer keyboard-attach class="bar-stable item-input-inset">
+    <ion-row>
+        <ion-col width-80>
+            <label class="item-input-wrapper">
+                <input type="text" placeholder="Type your message" on-return="sendMessage(); closeKeyboard()" ng-model="data.message" on-focus="inputUp()" on-blur="inputDown()" />
+            </label>
+        </ion-col>
+        <ion-col width-20>
+            <button class="button button-clear" ng-click="sendMessage()">
+                <ion-icon name="send"></ion-icon>
+            </button>
+        </ion-col>
+    </ion-row>
 </ion-footer>

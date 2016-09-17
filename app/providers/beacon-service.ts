@@ -3,20 +3,26 @@ import { Storage, LocalStorage } from 'ionic-angular';
 import { IBeacon } from 'ionic-native';
 import { Delegate, BeaconRegion } from "ionic-native/dist/index";
 
+declare var cordova: any;
+
 @Injectable()
 export class BeaconService {
     delegate: Delegate;
     region: BeaconRegion;
 
     constructor() {
-        // Request permission to use location on iOS
-        IBeacon.requestAlwaysAuthorization();
-        // create a new delegate and register it with the native layer
-        this.delegate = IBeacon.Delegate();
+
+        if (typeof cordova !== 'undefined') {
+            // Request permission to use location on iOS
+            IBeacon.requestAlwaysAuthorization();
+            // create a new delegate and register it with the native layer
+            this.delegate = IBeacon.Delegate();
+        }
     }
 
     startScanning() {
         // Subscribe to some of the delegate's event handlers
+        /*
         this.delegate.didRangeBeaconsInRegion()
             .subscribe(
                 data => console.log('didRangeBeaconsInRegion: ', data),
@@ -26,7 +32,7 @@ export class BeaconService {
             .subscribe(
                 data => console.log('didStartMonitoringForRegion: ', data),
                 error => console.error()
-            );
+            );*/
         this.delegate.didEnterRegion()
             .subscribe(
                 data => {
@@ -40,14 +46,14 @@ export class BeaconService {
                     console.log('didExitRegion', data);
                 }
             );
-
+/*
         let beaconRegion = IBeacon.BeaconRegion('MusicMashupBeacon','00000000-0000-0000-0000-000000000000');
 
         IBeacon.startMonitoringForRegion(beaconRegion)
             .then(
                 () => console.log('Native layer recieved the request to monitoring'),
                 error => console.error('Native layer failed to begin monitoring: ', error)
-            );
+            );*/
     }
 
     isBluetoothEnabled() {
@@ -108,7 +114,12 @@ export class BeaconService {
     }
 
     deactivateLocalBeacon() {
-        IBeacon.stopAdvertising(this.region);
+        IBeacon.stopAdvertising(this.region).then(
+            (data) => {
+                console.log('Stopped advertising');
+                console.log(data);
+            }
+        );
 
         /*
         cordova.plugins.locationManager.stopAdvertising()

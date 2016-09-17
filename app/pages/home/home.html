@@ -1,8 +1,8 @@
 <ion-navbar primary *navbar>
   <ion-title>Home</ion-title>
   <ion-buttons end>
-    <button primary (click)="presentInfoModal()">
-      Info
+    <button (click)="presentInfoModal()">
+      <ion-icon name="information-circle"></ion-icon>
     </button>
   </ion-buttons>
 </ion-navbar>
@@ -45,9 +45,12 @@
 <button (click)="startListening()">
   Start listening
 </button>
-<button (click)="startAdvertising()">
-  Start advertising
-</button>
+  <button (click)="startAdvertising()">
+    Start advertising
+  </button>
+  <button (click)="stopAdvertising()">
+    Stop advertising
+  </button>
   <button secondary fab fab-bottom fab-right (click)="goToSearchPage()">
     <ion-icon name="add"></ion-icon>
   </button>

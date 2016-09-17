@@ -10,7 +10,12 @@
 </ion-header>
 
 <ion-content class="info">
+
+  Room name: {{roomName}}
   <div>
-    <qrcode [qrdata]="'My QR code data string'" [size]="256" [level]="'M'"></qrcode>
+    <qrcode [qrdata]="roomName" [size]="256" [level]="'M'"></qrcode>
   </div>
+
+  <button (click)="share()">Share</button>
+
 </ion-content>

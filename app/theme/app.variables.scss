@@ -34,7 +34,8 @@ $colors: (
   favorite:   #69BB7B,
   muted: rgba(0,0,0,0.38),
   shadow: rgba(0,0,0,0.12),
-        text-color: #ffffff
+  text-color: #ffffff,
+   transparent: transparent
 
 );
 
@@ -56,5 +57,4 @@ ion-footer {
 .icon-padding {
   padding-right: 8px;
 }
-
 

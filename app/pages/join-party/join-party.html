@@ -1,0 +1,55 @@
+<!--
+  Generated template for the JoinPartyPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-navbar primary *navbar>
+  <ion-title>Join a party</ion-title>
+</ion-navbar>
+
+<ion-content padding class="host-party">
+  <ion-row>
+    <ion-col>
+      <ion-item class="transparent">
+        <ion-label floating>Roomname</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col text-center>
+      <div style="height: 64px"></div>
+      <ion-icon class="beacon-icon" name="qr-scanner"></ion-icon>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col text-center>
+      <h3>BEACON</h3>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <span>If your host has activated the beacon feature, you just have to be close to your party and you will get a notification with a room invite.</span>
+    </ion-col>
+  </ion-row>
+  <div style="height: 32px"></div>
+  <ion-row>
+    <ion-col>
+      <span>Or use the QR your host or anyone in the room can access</span>
+    </ion-col>
+  </ion-row>
+  <div style="height: 8px"></div>
+  <ion-row>
+    <ion-col text-center>
+      <button primary (click)="openScanner()">
+        <ion-icon name="qr-scanner"></ion-icon>
+        <span>Scan QR</span>
+      </button>
+    </ion-col>
+  </ion-row>
+  <button secondary fab fab-bottom fab-right (click)="goToTabsPage()">
+    <ion-icon name="checkmark"></ion-icon>
+  </button>
+
+</ion-content>

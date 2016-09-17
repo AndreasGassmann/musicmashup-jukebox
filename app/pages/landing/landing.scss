@@ -4,16 +4,11 @@
   background-image: url('../assets/background-landing.jpg');
   background-size: cover;
   background-position: center;
-
-  .logo-placeholder {
-    height: 96px;
-    width: 96px;
-    margin-bottom: 16px;
-    border-radius: 48px;
-    background-color: #ececec;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
+  .transparent {
+    color:#ffffff!important;
+    background-color:transparent;
   }
-
+  .beacon-icon {
+    font-size: 3em;
+  }
 }

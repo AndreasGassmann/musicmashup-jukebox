@@ -8,7 +8,7 @@ export class BarcodeService {
     picker: any;
 
     constructor() {
-        if (!this.platform.is('core') || typeof Scandit !== 'undefined') {
+        if (typeof Scandit !== 'undefined') {
             Scandit.License.setAppKey("ceKIGYn3xZidfbLaDQvWRxE90mlLjhxRqTj/8Q7dGko");
             var settings = new Scandit.ScanSettings();
             settings.setSymbologyEnabled(Scandit.Barcode.Symbology.QR, true);

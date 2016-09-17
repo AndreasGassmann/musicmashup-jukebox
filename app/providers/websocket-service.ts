@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Storage, LocalStorage } from 'ionic-angular';
+import { Storage, LocalStorage, App } from 'ionic-angular';
+import { TabsPage } from "../pages/tabs/tabs";
+
+
 
 export interface EventListener {
     onEvent();
@@ -27,7 +30,7 @@ export class WebSocketService {
     socket:any;
     listeners:TypedListener[];
 
-    constructor() {
+    constructor(private app: App) {
         this.listeners = [];
     }
 
@@ -38,6 +41,8 @@ export class WebSocketService {
         let self = this;
         this.socket.onopen = function () {
             self.isReady = true;
+
+            self.app.getActiveNav().setRoot(TabsPage);
         }
 
         this.socket.onclose = function () {

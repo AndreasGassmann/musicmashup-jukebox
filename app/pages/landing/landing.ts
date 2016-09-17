@@ -4,6 +4,7 @@ import { TabsPage } from '../tabs/tabs';
 import { BarcodeService } from "../../providers/barcode-service";
 import { HostPartyPage } from '../host-party/host-party';
 import { JoinPartyPage } from '../join-party/join-party';
+import {WebSocketService} from "../../providers/websocket-service";
 
 
 /*
@@ -17,7 +18,7 @@ import { JoinPartyPage } from '../join-party/join-party';
   providers: [BarcodeService]
 })
 export class LandingPage {
-  constructor(private nav: NavController, private _barcodeService: BarcodeService) {
+  constructor(private nav: NavController, private _barcodeService: BarcodeService, private webSocketService: WebSocketService) {
 
   }
 
@@ -31,7 +32,8 @@ export class LandingPage {
     this.nav.push(HostPartyPage);
   }
   goToJoinPartyPage() {
-    this.nav.push(JoinPartyPage);
+    this.webSocketService.connect(1);
+    //this.nav.push(JoinPartyPage);
   }
 
 }

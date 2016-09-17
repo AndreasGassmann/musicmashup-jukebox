@@ -21,14 +21,14 @@
   <ion-list>
     <ion-item *ngFor="let item of searchResults" (click)="itemClicked(item)">
       <ion-row>
-        <ion-col width-20>
+        <ion-col width-25>
           <img src="{{ item.snippet.thumbnails.default.url }}"/>
         </ion-col>
-        <ion-col width-80>
-          <h3>{{ item.snippet.title }}</h3>
+        <ion-col width-75>
+          <h2>{{ item.snippet.title }}</h2>
           <ion-row>
-            <ion-col>
-              <span>{{ item.snippet.channelTitle }}</span>
+            <ion-col class="no-padding">
+              <p>{{ item.snippet.channelTitle }}</p>
             </ion-col>
           </ion-row>
         </ion-col>

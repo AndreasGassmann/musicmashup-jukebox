@@ -1,6 +1,13 @@
 .search {
-
-
+  .no-padding {
+    padding: 8px 0;
+  }
+  .item img{
+    padding-left: 8px;
+  }
+  .item {
+    padding:0px;
+  }
 }
 
 ion-searchbar{

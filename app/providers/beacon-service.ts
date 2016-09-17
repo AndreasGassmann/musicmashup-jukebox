@@ -34,6 +34,13 @@ export class BeaconService {
                 }
             );
 
+        this.delegate.didExitRegion()
+            .subscribe(
+                data => {
+                    console.log('didExitRegion', data);
+                }
+            );
+
         let beaconRegion = IBeacon.BeaconRegion('MusicMashupBeacon','00000000-0000-0000-0000-000000000000');
 
         IBeacon.startMonitoringForRegion(beaconRegion)

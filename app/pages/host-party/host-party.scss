@@ -3,7 +3,7 @@
 
   background-image: url('../assets/background-landing.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: 32%;
 
   .transparent {
     color:#ffffff!important;
@@ -14,5 +14,11 @@
   }
   input::-webkit-input-placeholder {
     color:    #ffffff;
+  }
+  .input-has-focus ion-label[floating] {
+    color: color($colors, secondary);
+  }
+  .item-input.input-has-focus::after, .item-input.ng-invalid.ng-touched::after, .item-input.ng-valid.input-has-value::after, .item-input.ng-invalid.ng-touched.input-has-focus::after {
+    border-bottom-color: color($colors, secondary);
   }
 }

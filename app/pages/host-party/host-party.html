@@ -11,9 +11,9 @@
 <ion-content padding class="host-party">
   <ion-row>
     <ion-col>
-      <ion-item class="transparent">
-        <ion-label floating>Roomname</ion-label>
-        <ion-input type="text"></ion-input>
+      <ion-item class="transparent" >
+        <ion-label text-color floating>Roomname</ion-label>
+        <ion-input secondary type="text"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -31,7 +31,7 @@
   <ion-row>
     <ion-col width-20>
       <ion-item class="transparent">
-        <ion-checkbox [(ngModel)]="beacon" checked="true"></ion-checkbox>
+        <ion-checkbox secondary [(ngModel)]="beacon" checked="true" value="isChecked"></ion-checkbox>
       </ion-item>
     </ion-col>
     <ion-col width-80>
@@ -40,14 +40,14 @@
   </ion-row>
   <ion-row>
     <ion-col width-80 offset-20>
-      <span>If you don’t want to use the beacon feature, your friends can join your room by QR code or ID.</span>
+      <span class="">If you don’t want to use the beacon feature, your friends can join your room by QR code or ID.</span>
     </ion-col>
   </ion-row>
   <div style="height: 32px"></div>
   <ion-row>
     <ion-col width-20>
       <ion-item class="transparent">
-        <ion-checkbox checked="true" [(ngModel)]="YTMusic"></ion-checkbox>
+        <ion-checkbox secondary checked="true" value="isChecked" [(ngModel)]="YTMusic"></ion-checkbox>
       </ion-item>
     </ion-col>
     <ion-col width-80>

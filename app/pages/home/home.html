@@ -21,6 +21,13 @@
     <iframe name="video" id="video" src='{{playingVideo.url}}?rel=0&autoplay=1' frameborder='0' allowfullscreen></iframe>
   </div>
 
+  <ion-row *ngIf="room.queue.length == 0 && playingVideo" class="no-search muted" text-center>
+    <ion-col>
+      <i class="material-icons">audiotrack</i>
+      <h5>Only 1 song in the queue, let's add more!</h5>
+    </ion-col>
+  </ion-row>
+
   <ion-list>
     <ion-item *ngFor="let video of room.queue">
       <ion-row>

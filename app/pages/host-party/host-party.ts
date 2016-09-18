@@ -16,9 +16,11 @@ import {SocketService} from "../../providers/socket-service";
 })
 export class HostPartyPage {
   beacon: boolean;
+  YTMusic: boolean;
 
   constructor(private nav: NavController, private socketService: SocketService) {
-
+    this.beacon = true;
+    this.YTMusic = true;
   }
 
 
@@ -26,4 +28,13 @@ export class HostPartyPage {
     this.socketService.isAdmin = true;
     this.socketService.sendMessage('createRoom', { title: "Title", hasBeacon: this.beacon });
   }
+
+  
+  onKey($event){
+      /* check if Enter key */
+      if($event.which === 13){
+        this.goToTabsPage();
+      }
+  }
+
 }

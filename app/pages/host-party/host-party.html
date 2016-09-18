@@ -13,7 +13,7 @@
     <ion-col>
       <ion-item class="transparent" >
         <ion-label text-color floating>Roomname</ion-label>
-        <ion-input secondary type="text"></ion-input>
+        <ion-input secondary type="text" (keyup)="onKey($event)"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -31,7 +31,7 @@
   <ion-row>
     <ion-col width-20>
       <ion-item class="transparent">
-        <ion-checkbox secondary [(ngModel)]="beacon" checked="true" value="isChecked"></ion-checkbox>
+        <ion-checkbox secondary [(ngModel)]="beacon"></ion-checkbox>
       </ion-item>
     </ion-col>
     <ion-col width-80>
@@ -47,7 +47,7 @@
   <ion-row>
     <ion-col width-20>
       <ion-item class="transparent">
-        <ion-checkbox secondary checked="true" value="isChecked" [(ngModel)]="YTMusic"></ion-checkbox>
+        <ion-checkbox secondary [(ngModel)]="YTMusic"></ion-checkbox>
       </ion-item>
     </ion-col>
     <ion-col width-80>

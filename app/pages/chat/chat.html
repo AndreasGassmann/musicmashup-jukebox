@@ -16,13 +16,13 @@
             <ion-col width-100>
                 <ion-item>
                     <ion-label floating>Username</ion-label>
-                    <ion-input [(ngModel)]="userName" primary type="text"></ion-input>
+                    <ion-input [(ngModel)]="userName" (keyup)="onKeyUsername($event)" primary type="text"></ion-input>
                 </ion-item>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col text-center>
-                <button primary width-100 (click)="setUsername()">
+                <button primary width-100 (click)="setUsername()" >
                     <ion-icon name="send"></ion-icon>
                     <span>Let's chat!</span>
                 </button>
@@ -41,7 +41,7 @@
                         {{message.message}}
                     </ion-col>
                     <ion-col offset-50>
-                        <span class="muted small">{{message.userName}} {{message.timestamp | MessageTimePipe}}</span>
+                        <span class="muted small">{{message.userName}}, {{message.timestamp | MessageTimePipe}}</span>
                     </ion-col>
                 </ion-col>
 

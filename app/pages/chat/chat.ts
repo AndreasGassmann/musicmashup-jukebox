@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewChecked, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {SocketService} from "../../providers/socket-service";
 import {MessageTimePipe} from "../../pipe/MessageTimePipe";
@@ -13,7 +13,8 @@ import {MessageTimePipe} from "../../pipe/MessageTimePipe";
   templateUrl: 'build/pages/chat/chat.html',
   pipes: [MessageTimePipe]
 })
-export class ChatPage {
+export class ChatPage implements OnInit, AfterViewChecked {
+  @ViewChild('scroll-content') private myScrollContainer: ElementRef;
   room: any;
   message:string;
   socketId:string;
@@ -29,12 +30,35 @@ export class ChatPage {
     console.log(this.room.messages);
     console.log(this.socketId);
   }
+  ngOnInit() { 
+        console.log('on init');
+        this.scrollToBottom();
+  }
+
+  ngAfterViewChecked() {
+        console.log('after view checked');
+        this.scrollToBottom();        
+  }
+
+  scrollToBottom(): void {
+    console.log('scroll to bottom');
+    try {
+        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch(err) { }                 
+  }
+
 
   onKey($event){
     /* check if Enter key */
     if($event.which === 13){
       this.sendMessage();
     }
+  }
+
+  onKeyUsername($event){
+     if($event.which === 13){
+      this.setUsername();
+    } 
   }
 
   setUsername() {

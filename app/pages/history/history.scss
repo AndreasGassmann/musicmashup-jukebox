@@ -16,11 +16,15 @@
   ion-label {
     margin: 0;
   }
-
-
   .centered{
     display: flex;
     align-items: center;
+  }
+  .no-search {
+    height: 100%;
+  }
+  .no-search i {
+    font-size: 10em;
   }
 
 }

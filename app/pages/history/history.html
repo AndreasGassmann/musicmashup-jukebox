@@ -37,4 +37,11 @@
         </ion-item>
     </ion-list>
 
+    <ion-row *ngIf="room.history.length==0" class="no-search muted" text-center>
+        <ion-col>
+            <i class="material-icons">sentiment_dissatisfied</i>
+            <h5>Nothing is in the history, get on it and start listening to music!</h5>
+        </ion-col>
+    </ion-row>
+
 </ion-content>

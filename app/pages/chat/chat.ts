@@ -29,7 +29,9 @@ export class ChatPage {
   }
 
   setUsername() {
-    this.hasUsername = true;
+    if (this.userName.length != 0) {
+      this.hasUsername = true;
+    }
   }
 
   sendMessage(){
@@ -37,7 +39,7 @@ export class ChatPage {
       this.socketService.sendMessage("chatMessage", {
         id: 1,
         userId: this.socketService.socketId,
-        userName: 'Andy',
+        userName: this.userName,
         message: this.message,
         timestamp: Date.now(),
         avatarUrl: '',

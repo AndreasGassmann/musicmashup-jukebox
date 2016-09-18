@@ -32,6 +32,11 @@ export class HomePage {
       this.playLogic();
     });
 
+    if (this.room.hasBeacon) {
+      this.beaconService.stopMonitoring().then(() => {
+        this.startAdvertising();
+      });
+    }
   }
 
   public playLogic(){
@@ -58,7 +63,7 @@ export class HomePage {
   }
 
   startAdvertising() {
-    this.beaconService.createLocalBeacon();
+    this.beaconService.createLocalBeacon(this.socketService.room.id);
   }
 
   startListening() {

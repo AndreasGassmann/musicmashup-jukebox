@@ -15,6 +15,8 @@ import {SocketService} from "../../providers/socket-service";
   templateUrl: 'build/pages/host-party/host-party.html',
 })
 export class HostPartyPage {
+  beacon: boolean;
+
   constructor(private nav: NavController, private socketService: SocketService) {
 
   }
@@ -22,6 +24,6 @@ export class HostPartyPage {
 
   goToTabsPage() {
     this.socketService.isAdmin = true;
-    this.socketService.sendMessage('createRoom', { title: "Title" });
+    this.socketService.sendMessage('createRoom', { title: "Title", hasBeacon: this.beacon });
   }
 }

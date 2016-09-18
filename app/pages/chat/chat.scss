@@ -1,5 +1,9 @@
 .chat {
   background-color: #fefefe;
+  .event-text {
+    paddding:0;
+    margin:0;
+  }
   .message-wrap {
     padding-bottom: 16px;
   }

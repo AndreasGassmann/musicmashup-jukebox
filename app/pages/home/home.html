@@ -8,14 +8,14 @@
 </ion-navbar>
 
 <ion-content class="home">
-    <!-- ONBOARDING
-<div class="onboarding">
-<ion-row width-100>
-  <ion-col class="onboarding-center" text-center>
-    <h5>Start adding songs to the queue.</h5>
-  </ion-col>
-</ion-row>
--->
+
+<div class="onboarding" *ngIf="room.queue.length == 0">
+  <ion-row width-100>
+    <ion-col class="onboarding-center" text-center>
+      <h5>Start adding songs to the queue.</h5>
+    </ion-col>
+  </ion-row>
+</div>
 
   <div class='embed-container' *ngIf="playingVideo">
     <iframe name="video" id="video" src='{{playingVideo.url}}?rel=0&autoplay=1' frameborder='0' allowfullscreen></iframe>

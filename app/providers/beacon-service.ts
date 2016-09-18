@@ -40,7 +40,10 @@ export class BeaconService {
 
         this.delegate.didRangeBeaconsInRegion()
             .subscribe(
-                data => console.log('didRangeBeaconsInRegion: ', data),
+                data => {
+                    console.log('didRangeBeaconsInRegion: ', data);
+                    console.log('Has Beacons:', data.beacons);
+                },
                 error => console.error()
             );
 
@@ -53,24 +56,31 @@ export class BeaconService {
         this.delegate.didEnterRegion()
             .subscribe(
                 data => {
-                    this.createLocalNotification(data.beacons[0].minor);
                     console.log('didEnterRegion: ', data);
-                    this.socketService.sendMessage('joinRoom', { id: data.beacons[0].minor });
+                    if (data.beacons) {
+                        this.createLocalNotification(data.beacons[0].minor);
+                        this.socketService.sendMessage('joinRoom', { id: data.beacons[0].minor });
+                    }
                 }
             );
-/*
+
         this.delegate.didExitRegion()
             .subscribe(
                 data => {
                     console.log('didExitRegion', data);
                 }
             );
-*/
 
         IBeacon.startMonitoringForRegion(this.beaconRegion)
             .then(
                 () => console.log('Native layer recieved the request to monitoring'),
                 error => console.error('Native layer failed to begin monitoring: ', error)
+            );
+
+        IBeacon.startRangingBeaconsInRegion(this.beaconRegion)
+            .then(
+                () => console.log('StartRangingBeaconsInRegions'),
+                error => console.error('StartRangingBeaconsInRegion', error)
             );
     }
 

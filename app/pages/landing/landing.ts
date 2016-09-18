@@ -18,7 +18,9 @@ import {BeaconService} from "../../providers/beacon-service";
 })
 export class LandingPage {
   constructor(private nav: NavController, private barcodeService: BarcodeService, private beaconService: BeaconService) {
-    this.beaconService.startScanning();
+    setTimeout(() => {
+      this.beaconService.startScanning();
+    }, 2000);
   }
 
     openScanner() {

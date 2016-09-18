@@ -13,8 +13,11 @@ import {SocketService} from "../../providers/socket-service";
   templateUrl: 'build/pages/join-party/join-party.html',
 })
 export class JoinPartyPage {
+
+  id:string;
+
   constructor(private nav: NavController, private socketService: SocketService) {
-    this.socketService.sendMessage('joinRoom', { id: 1 });
+    this.socketService.sendMessage('joinRoom', { id: Number(this.id) });
   }
 
   goToTabsPage() {

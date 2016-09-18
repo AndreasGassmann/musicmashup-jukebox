@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage, LocalStorage } from 'ionic-angular';
-import {WebSocketService} from "./websocket-service";
+import {SocketService} from "./socket-service";
 
 declare var Scandit: any;
 
@@ -8,7 +8,7 @@ declare var Scandit: any;
 export class BarcodeService {
     picker: any;
 
-    constructor(private webSocketService: WebSocketService) {
+    constructor(private socketService:SocketService) {
         if (typeof Scandit !== 'undefined') {
             Scandit.License.setAppKey("ceKIGYn3xZidfbLaDQvWRxE90mlLjhxRqTj/8Q7dGko");
             var settings = new Scandit.ScanSettings();
@@ -22,7 +22,7 @@ export class BarcodeService {
             this.picker.show(function success(session) {
                     session.stopScanning();
                     alert(session.newlyRecognizedCodes[0].data);
-                    self.webSocketService.connect(Number(session.newlyRecognizedCodes[0].data));
+                    self.socketService.sendMessage('joinRoom', { id: Number(session.newlyRecognizedCodes[0].data) });
                 }, function manual(content) {
                     alert("Manual: " + content);
                 },
@@ -32,3 +32,4 @@ export class BarcodeService {
             this.picker.startScanning();
     }
 }
+

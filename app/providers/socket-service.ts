@@ -21,6 +21,7 @@ export class SocketService {
     user: any;
     data: any = null;
     socketHost: string = 'http://92.51.135.50:8080/';
+    socketId:string;
 
     room:any;
     isAdmin:boolean = false;
@@ -35,6 +36,7 @@ export class SocketService {
     initialize() {
         this.socket = io.connect(this.socketHost);
         var self = this;
+        this.socketId = this.socket.id;
 
         console.log(this.socket);
 
@@ -71,6 +73,10 @@ export class SocketService {
             self.app.getActiveNav().setRoot(TabsPage);
             this.events.publish("roomUpdated");
             console.log(data);
+        });
+
+        this.socket.on('newChatMessage', (data) => {
+            this.room.messages.push(data);
         });
 
         this.socket.on('updateQueue', (data) => {

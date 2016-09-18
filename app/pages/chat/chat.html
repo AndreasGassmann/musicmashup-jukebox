@@ -7,9 +7,9 @@
     <ion-row *ngFor="let message of messages" class="message-wrap">
     </ion-row>
 
-
-    <ion-row *ngFor="let message of messages" class="message-wrap">
-        <ion-col width-90 offset-10 *ngIf="message.isOwnMessage">
+    <div *ngFor="let message of room.messages">
+    <ion-row *ngIf="!message.isEvent" class="message-wrap">
+        <ion-col width-90 offset-10 *ngIf="message.userId == socketId">
             <div class="triangle-right"></div>
             <ion-col class="message-own" >
                 {{message.message}}
@@ -19,10 +19,10 @@
             </ion-col>
         </ion-col>
 
-      <ion-col width-10 *ngIf="!message.isOwnMessage">
+      <ion-col width-10 *ngIf="!message.userId == socketId">
         <ion-icon class="avatar" name="person"></ion-icon>
       </ion-col>
-      <ion-col width-90 *ngIf="!message.isOwnMessage">
+      <ion-col width-90 *ngIf="!message.userId == socketId">
         <div class="triangle-left"></div>
         <ion-col class="message" >
           {{message.message}}
@@ -31,14 +31,15 @@
           <span class="muted small">{{message.userName}} {{message.timestamp | date:'d.m.y'}}</span>
         </ion-col>
       </ion-col>
-
     </ion-row>
 
-    <ion-row class="events message-wrap" *ngFor="let event of events">
-          <span>{{event.userName}}</span>
-          <span class="muted">{{event.action}}</span>
-          <span primary>{{event.videoName}}</span>
+    <ion-row *ngIf="message.isEvent" class="events message-wrap" >
+        <span>{{message.userName}}</span>
+        <span class="muted">{{message.action}}</span>
+        <span primary>{{message.videoName}}</span>
     </ion-row>
+    </div>
+
 
 
 
@@ -48,12 +49,12 @@
     <ion-row>
         <ion-col width-80>
             <ion-label class="item-input-wrapper">
-                <ion-input class="input-msg" type="text" placeholder="Type your message" on-return="sendMessage(); closeKeyboard()" ng-model="data.message" on-focus="inputUp()" on-blur="inputDown()">
+                <ion-input class="input-msg" type="text" placeholder="Type your message" [(ngModel)]="message">
                     </ion-input>
             </ion-label>
         </ion-col>
         <ion-col width-20>
-            <button class="button button-clear" ng-click="sendMessage()">
+            <button class="button button-clear" (click)="sendMessage()">
                 <ion-icon name="send"></ion-icon>
             </button>
         </ion-col>

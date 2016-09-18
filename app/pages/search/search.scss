@@ -8,8 +8,14 @@
   .item {
     padding:0px;
   }
+  .no-search {
+    height: 100%;
+    color: rgba(0,0,0,0.54);
+  }
+  .no-search i {
+    font-size: 10em;
+  }
 }
-
 ion-searchbar{
   background-color: color($colors, primary);
 }

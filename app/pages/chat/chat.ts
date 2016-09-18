@@ -19,34 +19,9 @@ export class ChatPage {
   constructor(private nav: NavController, private socketService:SocketService) {
     this.room = this.socketService.room;
     this.socketId = this.socketService.socketId;
-    /*
-    this.messages = [
-      {
-        id: 1,
-        userName: 'Andy',
-        message: 'Hi',
-        timestamp: Date.now(),
-        avatarUrl: '',
-        isOwnMessage: true
-      },
-      {
-        id: 2,
-        userName: 'Lukas',
-        message: 'Super siite',
-        timestamp: Date.now(),
-        avatarUrl: '',
-        isOwnMessage: false
-      }
-    ];
 
-    this.events = [
-      {
-        userName: "Pascal",
-        action: 'just added',
-        videoName: "Kygo - Stay"
-      }
-    ]
-    */
+    console.log(this.room.messages);
+    console.log(this.socketId);
   }
 
   sendMessage(){

@@ -17,10 +17,9 @@ export class JoinPartyPage {
   id:string;
 
   constructor(private nav: NavController, private socketService: SocketService) {
-    this.socketService.sendMessage('joinRoom', { id: Number(this.id) });
   }
 
   goToTabsPage() {
-    this.nav.setRoot(TabsPage);
+    this.socketService.sendMessage('joinRoom', { id: Number(this.id) });
   }
 }

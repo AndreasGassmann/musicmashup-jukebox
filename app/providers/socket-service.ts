@@ -36,11 +36,12 @@ export class SocketService {
     initialize() {
         this.socket = io.connect(this.socketHost);
         var self = this;
-        this.socketId = this.socket.id;
 
         console.log(this.socket);
 
         this.socket.on("connect", (msg) => {
+            this.socketId = this.socket.id;
+
             console.log('on connect');
             this.socketObserver.next({ category: 'connect', message: 'user connected'});
         });

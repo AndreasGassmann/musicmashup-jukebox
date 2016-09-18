@@ -9,7 +9,7 @@
 
 <ion-content class="home">
 
-<div class="onboarding" *ngIf="room.queue.length == 0">
+<div class="onboarding" *ngIf="room.queue.length == 0 && !playingVideo">
   <ion-row width-100>
     <ion-col class="onboarding-center" text-center>
       <h5>Start adding songs to the queue.</h5>

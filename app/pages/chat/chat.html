@@ -46,7 +46,7 @@
     <ion-row>
         <ion-col width-80>
             <ion-label class="item-input-wrapper">
-                <ion-input class="input-msg" type="text" placeholder="Type your message" [(ngModel)]="message">
+                <ion-input class="input-msg" type="text" placeholder="Type your message" [(ngModel)]="message" (keyup)="onKey($event)">
                     </ion-input>
             </ion-label>
         </ion-col>

@@ -9,7 +9,7 @@ import {SocketService} from "../../providers/socket-service";
   Ionic pages and navigation.
 */
 @Component({
-  templateUrl: 'build/pages/chat/chat.html',
+  templateUrl: 'build/pages/chat/chat.html'
 })
 export class ChatPage {
   room: any;
@@ -22,6 +22,13 @@ export class ChatPage {
 
     console.log(this.room.messages);
     console.log(this.socketId);
+  }
+
+  onKey($event){
+    /* check if Enter key */
+    if($event.which === 13){
+      this.sendMessage();
+    }
   }
 
   sendMessage(){

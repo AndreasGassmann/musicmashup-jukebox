@@ -22,4 +22,11 @@ export class JoinPartyPage {
   goToTabsPage() {
     this.socketService.sendMessage('joinRoom', { id: Number(this.id) });
   }
+
+  onKey($event){
+      /* check if Enter key */
+      if($event.which === 13){
+        this.goToTabsPage();
+      }
+  }
 }

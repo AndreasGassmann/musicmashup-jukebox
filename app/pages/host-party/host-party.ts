@@ -24,4 +24,13 @@ export class HostPartyPage {
     this.socketService.isAdmin = true;
     this.socketService.sendMessage('createRoom', { title: "Title" });
   }
+
+  
+  onKey($event){
+      /* check if Enter key */
+      if($event.which === 13){
+        this.goToTabsPage();
+      }
+  }
+
 }

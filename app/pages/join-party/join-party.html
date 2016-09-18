@@ -13,7 +13,7 @@
     <ion-col>
       <ion-item class="transparent">
         <ion-label floating>Room ID</ion-label>
-        <ion-input type="text" [(ngModel)]="id"></ion-input>
+        <ion-input type="text" [(ngModel)]="id" (keyup)="onKey($event)"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>

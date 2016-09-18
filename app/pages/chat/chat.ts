@@ -1,6 +1,7 @@
 import { Component, AfterViewChecked, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {SocketService} from "../../providers/socket-service";
+import {MessageTimePipe} from "../../pipe/MessageTimePipe";
 
 /*
   Generated class for the ChatPage page.
@@ -9,7 +10,8 @@ import {SocketService} from "../../providers/socket-service";
   Ionic pages and navigation.
 */
 @Component({
-  templateUrl: 'build/pages/chat/chat.html'
+  templateUrl: 'build/pages/chat/chat.html',
+  pipes: [MessageTimePipe]
 })
 export class ChatPage implements OnInit, AfterViewChecked {
   @ViewChild('scroll-content') private myScrollContainer: ElementRef;

@@ -9,7 +9,7 @@
                 <i class="material-icons userlogin">face</i>
             </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row text-center>
             <p>Choose a username and you will be able to chat with your friends.</p>
         </ion-row>
         <ion-row>
@@ -33,7 +33,6 @@
     <span *ngIf="hasUsername">
         <ion-row *ngFor="let message of messages" class="message-wrap">
         </ion-row>
-
         <div *ngFor="let message of room.messages">
             <ion-row *ngIf="!message.isEvent" class="message-wrap">
                 <ion-col width-90 offset-10 *ngIf="message.userId == socketId">
@@ -42,7 +41,7 @@
                         {{message.message}}
                     </ion-col>
                     <ion-col offset-50>
-                        <span class="muted small">{{message.userName}}{{message.timestamp}}</span>
+                        <span class="muted small">{{message.userName}} {{message.timestamp | MessageTimePipe}}</span>
                     </ion-col>
                 </ion-col>
 
@@ -55,7 +54,7 @@
                         {{message.message}}
                     </ion-col>
                     <ion-col>
-                        <span class="muted small">{{message.userName}} {{message.timestamp | date:'d.m.y'}}</span>
+                        <span class="muted small">{{message.userName}}, {{message.timestamp | MessageTimePipe}}</span>
                     </ion-col>
                 </ion-col>
             </ion-row>
@@ -63,7 +62,7 @@
             <ion-row *ngIf="message.isEvent" class="events message-wrap" >
                 <span>{{message.userName}}</span>
                 <span class="muted">{{message.action}}</span>
-                <span primary class="overflow-large">{{message.videoName}}</span>
+                <span primary class="overflow-large event-text">{{message.videoName}}</span>
             </ion-row>
         </div>
     </span>

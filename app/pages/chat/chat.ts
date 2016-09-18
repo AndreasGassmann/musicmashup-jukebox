@@ -1,7 +1,8 @@
 import { Component, AfterViewChecked, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Modal } from 'ionic-angular';
 import {SocketService} from "../../providers/socket-service";
 import {MessageTimePipe} from "../../pipe/MessageTimePipe";
+import {InfoModal} from "../../modals/info/info";
 
 /*
   Generated class for the ChatPage page.
@@ -21,7 +22,7 @@ export class ChatPage implements OnInit, AfterViewChecked {
   userName: string;
   hasUsername: boolean;
 
-  constructor(private nav: NavController, private socketService:SocketService) {
+  constructor(private navController: NavController, private socketService:SocketService) {
     this.room = this.socketService.room;
     this.socketId = this.socketService.socketId;
     this.userName = '';
@@ -80,5 +81,10 @@ export class ChatPage implements OnInit, AfterViewChecked {
       });
       this.message = "";
     }
+  }
+
+  presentInfoModal() {
+    console.log(this.socketService.room);
+    this.navController.present(Modal.create(InfoModal, {roomName: this.socketService.room.id}));
   }
 }

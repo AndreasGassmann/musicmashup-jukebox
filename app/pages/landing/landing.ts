@@ -6,12 +6,6 @@ import { HostPartyPage } from '../host-party/host-party';
 import { JoinPartyPage } from '../join-party/join-party';
 import {BeaconService} from "../../providers/beacon-service";
 
-/*
-  Generated class for the LandingPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   templateUrl: 'build/pages/landing/landing.html',
   providers: [BarcodeService]

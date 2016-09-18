@@ -44,7 +44,6 @@ export class HomePage {
   }
 
   public matchVotes() {
-    console.log('matching votes');
     for(var i = 0; this.localVotes.length; i++) {
       let match = this.room.queue.find((item) => { return item.globalVideoId === this.localVotes[i].id});
       if (match) {
@@ -56,8 +55,6 @@ export class HomePage {
   }
 
   public playLogic() {
-    console.log('check for play');
-    console.log('is admin: ' + this.socketService.isAdmin);
     if(this.socketService.isAdmin && this.room.queue.length > 0 && typeof this.playingVideo === 'undefined'){
       this.playingVideo = this.room.queue[0];
       this.socketService.sendMessage("playingVideo", this.room.queue[0]);
@@ -65,14 +62,11 @@ export class HomePage {
   }
 
   private addToLocalVotes(globalVideoId, isUpvote, callback) {
-    console.log('Add to local votes', this.localVotes);
     let localVote = this.localVotes.find((vote) => { return vote.id === globalVideoId });
     if (!localVote) {
-      console.log('Doesnt have vote');
       this.localVotes.push({id: globalVideoId, isUpvote: isUpvote});
       callback(1);
     } else {
-      console.log('same vote');
       for(var i = 0; this.localVotes.length; i++) {
         if (this.localVotes[i].id === globalVideoId) {
           this.localVotes.splice(i, 1);
@@ -83,7 +77,6 @@ export class HomePage {
   }
 
   public voteUp(video:Video){
-    console.log('upvote');
     video.voteValue = 1;
     this.addToLocalVotes(video.globalVideoId, true, (data) => {
       video.voteValue = data;
@@ -92,7 +85,6 @@ export class HomePage {
   }
 
   public voteDown(video:Video){
-    console.log('downvote');
     video.voteValue = -1;
     this.addToLocalVotes(video.globalVideoId, false, (data) => {
       video.voteValue = data;

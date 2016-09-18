@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {SocketService} from "../../providers/socket-service";
+import {MessageTimePipe} from "../../pipe/MessageTimePipe";
 
 /*
   Generated class for the ChatPage page.
@@ -10,6 +11,7 @@ import {SocketService} from "../../providers/socket-service";
 */
 @Component({
   templateUrl: 'build/pages/chat/chat.html',
+  pipes: [MessageTimePipe]
 })
 export class ChatPage {
   room: any;

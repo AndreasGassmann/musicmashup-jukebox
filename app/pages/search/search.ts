@@ -47,6 +47,7 @@ export class SearchPage {
     video.played = false;
     video.thumbUrl = item.snippet.thumbnails.default.url;
     video.url = "https://www.youtube.com/embed/" + item.id.videoId;
+    video.videoId = item.id.videoId;
     video.voteCount = 0;
 
     this.socketService.sendMessage("addVideo", video);

@@ -8,7 +8,7 @@ import {Events} from "ionic-angular/index";
 import {YoutubeVideo} from "../../classes/YoutubeVideo";
 import {Video} from "../../classes/Video";
 declare var document: any;
-declare var e: any;
+declare var YT: any;
 declare var target: any;
 
 
@@ -43,10 +43,43 @@ export class HomePage {
     console.log('check for play');
     console.log('is admin: ' + this.socketService.isAdmin);
     if(this.socketService.isAdmin && this.room.queue.length > 0 && typeof this.playingVideo === 'undefined'){
+
+      console.log('before init' + this.room.queue[0].title);
       this.playingVideo = this.room.queue[0];
       this.socketService.sendMessage("playingVideo", this.room.queue[0]);
+      console.log('after init' + this.room.queue[0].title);
+
+      // Replace the 'video' element with an <iframe> and
+      // YouTube player after the API code downloads.
+        let self = this;
+
+      var player = new YT.Player('video', {
+          autoplay: 1,
+          height: '390',
+          width: '640',
+          videoId: this.playingVideo.videoId,
+          events: {
+            'onReady': (event) =>{
+      event.target.playVideo();
+  },
+            'onStateChange': (event)=> {
+    if (event.data == YT.PlayerState.ENDED) {
+      console.log('video ended, notify server');
+      self.socketService.sendMessage("playingVideo", self.room.queue[0]);
+      console.log('start next video: ' + self.room.queue[0].title);
+      
+      this.playingVideo = self.room.queue[0];
+      player.loadVideoById(this.playingVideo.videoId);
     }
   }
+          }
+        });
+      
+    }
+  }
+
+  
+
 
   public voteUp(video:Video){
     video.voteValue = 1;

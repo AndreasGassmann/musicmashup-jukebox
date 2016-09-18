@@ -19,11 +19,13 @@ declare var target: any;
 })
 export class HomePage {
 
+  localVotes: Array<{id: number, isUpvote: boolean}>;
   room:any;
   playingVideo:any;
 
   constructor(private navController: NavController, private beaconService: BeaconService, private socketService: SocketService, public events: Events) {
-     this.room = this.socketService.room;
+    this.room = this.socketService.room;
+    this.localVotes = [];
 
     this.playLogic();
 
@@ -48,14 +50,41 @@ export class HomePage {
     }
   }
 
+  private addToLocalVotes(globalVideoId, isUpvote) {
+    console.log('Add to local votes', this.localVotes);
+    let localVote = this.localVotes.find((vote) => { return vote.id === globalVideoId });
+    if (!localVote) {
+      console.log('Doesnt have vote');
+      this.localVotes.push({id: globalVideoId, isUpvote: isUpvote});
+      return true;
+    } else if (localVote.isUpvote !== isUpvote) {
+      console.log('updating vote');
+      for(var i = 0; this.localVotes.length; i++) {
+        if (this.localVotes[i].id === globalVideoId) {
+          this.localVotes.splice(i, 1);
+        }
+      }
+      return true;
+    } else {
+      console.log('same vote');
+      return false;
+    }
+  }
+
   public voteUp(video:Video){
+    console.log('upvote');
     video.voteValue = 1;
-    this.socketService.sendMessage("addVote", video);
+    if (this.addToLocalVotes(video.globalVideoId, true)) {
+      this.socketService.sendMessage("addVote", video);
+    }
   }
 
   public voteDown(video:Video){
+    console.log('downvote');
     video.voteValue = -1;
-    this.socketService.sendMessage("addVote", video);
+    if (this.addToLocalVotes(video.globalVideoId, false)) {
+      this.socketService.sendMessage("addVote", video);
+    }
   }
 
   public goToSearchPage(){

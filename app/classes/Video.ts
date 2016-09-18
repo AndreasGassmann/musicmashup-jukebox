@@ -11,4 +11,5 @@ export class Video {
   played:boolean;
   voteCount:number;
   voteValue:number;
+  globalVideoId:number;
 }

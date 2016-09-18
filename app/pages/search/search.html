@@ -5,10 +5,10 @@
   Ionic pages and navigation.
 -->
 <ion-navbar *navbar primary>
-  <ion-title>search</ion-title>
+  <ion-title>Search</ion-title>
 </ion-navbar>
 
-<ion-searchbar class="4dp-elevation"
+<ion-searchbar placeholder="Search for YouTube videos" class="4dp-elevation"
                [(ngModel)]="searchInput"
         [showCancelButton]="shouldShowCancel"
         (ionInput)="onInput($event)"

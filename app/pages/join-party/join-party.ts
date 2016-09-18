@@ -24,6 +24,12 @@ export class JoinPartyPage {
     this.socketService.sendMessage('joinRoom', { id: Number(this.id) });
   }
 
+  onKey($event){
+      /* check if Enter key */
+      if($event.which === 13){
+        this.goToTabsPage();
+      }
+  }
   openScanner() {
     this.barcodeService.openScanner();
   }

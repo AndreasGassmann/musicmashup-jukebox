@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {SocketService} from "../../providers/socket-service";
+import {MessageTimePipe} from "../../pipe/MessageTimePipe";
 
 /*
   Generated class for the ChatPage page.
@@ -10,6 +11,7 @@ import {SocketService} from "../../providers/socket-service";
 */
 @Component({
   templateUrl: 'build/pages/chat/chat.html',
+  pipes: [MessageTimePipe]
 })
 export class ChatPage {
   room: any;
@@ -26,6 +28,13 @@ export class ChatPage {
 
     console.log(this.room.messages);
     console.log(this.socketId);
+  }
+
+  onKey($event){
+    /* check if Enter key */
+    if($event.which === 13){
+      this.sendMessage();
+    }
   }
 
   setUsername() {

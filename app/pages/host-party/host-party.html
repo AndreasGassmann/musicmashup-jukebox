@@ -13,7 +13,7 @@
     <ion-col>
       <ion-item class="transparent" >
         <ion-label text-color floating>Roomname</ion-label>
-        <ion-input secondary type="text"></ion-input>
+        <ion-input secondary type="text" (keyup)="onKey($event)"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>

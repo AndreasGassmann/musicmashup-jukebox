@@ -35,6 +35,11 @@
       </ion-row>
     </ion-item>
 
+
+    <ion-item *ngIf="searchResults.length==0">
+      Type to search a video
+    </ion-item>
+
   </ion-list>
 
 </ion-content>

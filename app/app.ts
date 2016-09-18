@@ -49,4 +49,4 @@ export class MyApp {
   }
 }
 
-ionicBootstrap(MyApp, [BeaconService, BarcodeService, SocketService]);
+ionicBootstrap(MyApp, [BeaconService, BarcodeService, SocketService], {mode:'md'});

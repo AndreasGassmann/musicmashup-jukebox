@@ -15,10 +15,14 @@ export class ChatPage {
   room: any;
   message:string;
   socketId:string;
+  userName: string;
+  hasUsername: boolean;
 
   constructor(private nav: NavController, private socketService:SocketService) {
     this.room = this.socketService.room;
     this.socketId = this.socketService.socketId;
+    this.userName = '';
+    this.hasUsername = false;
 
     console.log(this.room.messages);
     console.log(this.socketId);
@@ -31,12 +35,18 @@ export class ChatPage {
     }
   }
 
+  setUsername() {
+    if (this.userName.length != 0) {
+      this.hasUsername = true;
+    }
+  }
+
   sendMessage(){
     if(this.message != "") {
       this.socketService.sendMessage("chatMessage", {
         id: 1,
         userId: this.socketService.socketId,
-        userName: 'Andy',
+        userName: this.userName,
         message: this.message,
         timestamp: Date.now(),
         avatarUrl: '',

@@ -32,6 +32,11 @@ export class HomePage {
       this.playLogic();
     });
 
+    if (this.room.hasBeacon) {
+      this.beaconService.stopMonitoring().then(() => {
+        this.startAdvertising();
+      });
+    }
   }
 
   public playLogic(){
@@ -58,7 +63,7 @@ export class HomePage {
   }
 
   startAdvertising() {
-    this.beaconService.createLocalBeacon();
+    this.beaconService.createLocalBeacon(this.socketService.room.id);
   }
 
   startListening() {
@@ -66,7 +71,8 @@ export class HomePage {
   }
 
   presentInfoModal() {
-    this.navController.present(Modal.create(InfoModal, {roomName: '1'}));
+    console.log(this.socketService.room);
+    this.navController.present(Modal.create(InfoModal, {roomName: this.socketService.room.id}));
   }
 }
 

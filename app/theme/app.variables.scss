@@ -58,3 +58,15 @@ ion-footer {
   padding-right: 8px;
 }
 
+.overflow, .overflow-large {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.overflow {
+  max-width: 24ch;
+
+}
+.overflow {
+  max-width: 34ch;
+}
+

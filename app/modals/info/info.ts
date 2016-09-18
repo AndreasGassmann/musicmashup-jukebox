@@ -11,7 +11,7 @@ export class InfoModal {
   roomName: string;
 
   constructor(private viewCtrl: ViewController, private _navParams: NavParams) {
-    this.roomName = this._navParams.get("roomName");
+    this.roomName = this._navParams.get("roomName").toString();
   }
 
   share() {

@@ -4,6 +4,7 @@ import { TabsPage } from '../tabs/tabs';
 import { BarcodeService } from "../../providers/barcode-service";
 import { HostPartyPage } from '../host-party/host-party';
 import { JoinPartyPage } from '../join-party/join-party';
+import {BeaconService} from "../../providers/beacon-service";
 
 /*
   Generated class for the LandingPage page.
@@ -16,12 +17,14 @@ import { JoinPartyPage } from '../join-party/join-party';
   providers: [BarcodeService]
 })
 export class LandingPage {
-  constructor(private nav: NavController, private _barcodeService: BarcodeService) {
-
+  constructor(private nav: NavController, private barcodeService: BarcodeService, private beaconService: BeaconService) {
+    setTimeout(() => {
+      this.beaconService.startScanning();
+    }, 2000);
   }
 
     openScanner() {
-      this._barcodeService.openScanner();
+      this.barcodeService.openScanner();
     }
     goToTabsPage() {
       this.nav.setRoot(TabsPage);

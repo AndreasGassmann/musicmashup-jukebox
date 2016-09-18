@@ -30,7 +30,7 @@
         <ion-col width-67>
           <ion-row class="centered">
             <ion-col width-90>
-              <h2>{{video.title}}</h2>
+              <h2 class="overflow">{{video.title}}</h2>
               <span class="muted small">04:03</span>
               <ion-row>
                 <ion-col>
@@ -55,15 +55,6 @@
       </ion-row>
     </ion-item>
   </ion-list>
-<button (click)="startListening()">
-  Start listening
-</button>
-  <button (click)="startAdvertising()">
-    Start advertising
-  </button>
-  <button (click)="stopAdvertising()">
-    Stop advertising
-  </button>
   <button secondary fab fab-bottom fab-right (click)="goToSearchPage()">
     <ion-icon name="add"></ion-icon>
   </button>

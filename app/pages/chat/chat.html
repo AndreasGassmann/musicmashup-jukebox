@@ -19,10 +19,10 @@
             </ion-col>
         </ion-col>
 
-      <ion-col width-10 *ngIf="!message.userId == socketId">
+      <ion-col width-10 *ngIf="message.userId !== socketId">
         <ion-icon class="avatar" name="person"></ion-icon>
       </ion-col>
-      <ion-col width-90 *ngIf="!message.userId == socketId">
+      <ion-col width-90 *ngIf="message.userId !== socketId">
         <div class="triangle-left"></div>
         <ion-col class="message" >
           {{message.message}}
@@ -39,9 +39,6 @@
         <span primary>{{message.videoName}}</span>
     </ion-row>
     </div>
-
-
-
 
 </ion-content>
 

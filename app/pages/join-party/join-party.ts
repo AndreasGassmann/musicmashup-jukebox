@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import {SocketService} from "../../providers/socket-service";
+import {BarcodeService} from "../../providers/barcode-service";
 
 /*
   Generated class for the JoinPartyPage page.
@@ -16,10 +17,14 @@ export class JoinPartyPage {
 
   id:string;
 
-  constructor(private nav: NavController, private socketService: SocketService) {
+  constructor(private nav: NavController, private socketService: SocketService, private barcodeService: BarcodeService) {
   }
 
   goToTabsPage() {
     this.socketService.sendMessage('joinRoom', { id: Number(this.id) });
+  }
+
+  openScanner() {
+    this.barcodeService.openScanner();
   }
 }

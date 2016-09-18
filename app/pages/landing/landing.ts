@@ -16,12 +16,12 @@ import { JoinPartyPage } from '../join-party/join-party';
   providers: [BarcodeService]
 })
 export class LandingPage {
-  constructor(private nav: NavController, private _barcodeService: BarcodeService) {
+  constructor(private nav: NavController, private barcodeService: BarcodeService) {
 
   }
 
     openScanner() {
-      this._barcodeService.openScanner();
+      this.barcodeService.openScanner();
     }
     goToTabsPage() {
       this.nav.setRoot(TabsPage);

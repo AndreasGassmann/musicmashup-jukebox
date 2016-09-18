@@ -5,6 +5,7 @@ import {TabsPage} from './pages/tabs/tabs';
 import { LandingPage } from './pages/landing/landing';
 import {BeaconService} from "./providers/beacon-service";
 import {SocketService} from './providers/socket-service';
+import {BarcodeService} from "./providers/barcode-service";
 
 declare var evothings: any;
 
@@ -48,4 +49,4 @@ export class MyApp {
   }
 }
 
-ionicBootstrap(MyApp, [BeaconService, SocketService]);
+ionicBootstrap(MyApp, [BeaconService, BarcodeService, SocketService]);

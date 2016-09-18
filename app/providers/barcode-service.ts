@@ -21,7 +21,6 @@ export class BarcodeService {
         let self = this;
             this.picker.show(function success(session) {
                     session.stopScanning();
-                    alert(session.newlyRecognizedCodes[0].data);
                     self.socketService.sendMessage('joinRoom', { id: Number(session.newlyRecognizedCodes[0].data) });
                 }, function manual(content) {
                     alert("Manual: " + content);

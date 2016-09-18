@@ -5,9 +5,36 @@
   Ionic pages and navigation.
 -->
 <ion-navbar primary *navbar>
-  <ion-title>History</ion-title>
+    <ion-title>History</ion-title>
 </ion-navbar>
 
-<ion-content padding class="history">
-  
+<ion-content class="history">
+
+    <ion-list>
+        <ion-item *ngFor="let video of room.history">
+            <ion-row>
+                <ion-col class="centered" width-33>
+                    <img src="{{video.thumbUrl}}"/>
+                </ion-col>
+                <ion-col width-67>
+                    <ion-row class="centered">
+                        <ion-col width-90>
+                            <h2>{{video.title}}</h2>
+                            <span class="muted small">04:03</span>
+                            <ion-row>
+                                <ion-col>
+                                    <img class="avatar" src="build/assets/background-landing.jpg"/>
+                                    <span class="muted small">Pascal Brun</span>
+                                </ion-col>
+                            </ion-row>
+                        </ion-col>
+                        <ion-col text-center width-10>
+                            <span>{{video.voteCount}}</span>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-list>
+
 </ion-content>

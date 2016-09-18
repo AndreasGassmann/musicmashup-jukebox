@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import {SocketService} from "../../providers/socket-service";
 
 /*
   Generated class for the HistoryPage page.
@@ -11,5 +12,12 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'build/pages/history/history.html',
 })
 export class HistoryPage {
-  constructor(private nav: NavController) {}
+
+  room:any;
+
+  constructor(private nav: NavController, private socketService: SocketService) {
+    this.room = socketService.room;
+
+    console.log(this.room.history);
+  }
 }

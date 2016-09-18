@@ -23,7 +23,6 @@ export class MyApp {
 
       this.socket.initialize();
       this.socket.socketService.subscribe(event => {
-        console.log('message received from server... ', event);
       });
 
 /*

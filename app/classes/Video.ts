@@ -9,4 +9,6 @@ export class Video {
   datetime_added:Date;
   room:Room;
   played:boolean;
+  voteCount:number;
+  voteValue:number;
 }

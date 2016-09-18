@@ -2,6 +2,11 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { App } from 'ionic-angular';
+import {TabsPage} from "../pages/tabs/tabs";
+import { Events } from 'ionic-angular';
+
+
 //import * as io from 'socket.io-client';
 
 declare var io: any;
@@ -17,7 +22,10 @@ export class SocketService {
     data: any = null;
     socketHost: string = 'http://92.51.135.50:8080/';
 
-    constructor() {
+    room:any;
+    isAdmin:boolean = false;
+
+    constructor(private app: App, public events: Events) {
         this.socketService = Observable.create(observer => {
             this.socketObserver = observer;
         });
@@ -26,6 +34,9 @@ export class SocketService {
 
     initialize() {
         this.socket = io.connect(this.socketHost);
+        var self = this;
+
+        console.log(this.socket);
 
         this.socket.on("connect", (msg) => {
             console.log('on connect');
@@ -49,14 +60,28 @@ export class SocketService {
             // io.emit('user disconnected');
         });
 
+
         this.socket.on('newUser', (data) => {
             console.log(data);
             alert(data);
         });
 
         this.socket.on('joinedRoom', (data) => {
+            this.room = data;
+            self.app.getActiveNav().setRoot(TabsPage);
+            this.events.publish("roomUpdated");
             console.log(data);
-            alert(data);
+        });
+
+        this.socket.on('updateQueue', (data) => {
+            this.room.queue = data;
+            this.events.publish("roomUpdated");
+        });
+
+        this.socket.on('updateQueueAndHistory', (data) => {
+            this.room.queue = data.queue;
+            this.room.history = data.history;
+            this.events.publish("roomUpdated");
         });
 
         this.socket.on("message", (msg) => {
@@ -66,10 +91,11 @@ export class SocketService {
     }
 
     sendMessage(eventName, data) {
-        // console.log('in sendMessage and socket is: ', this.socket);
-        this.socket.emit(eventName, data);
-        //this.socketObserver.next({ category: 'sendMessage', message: message });
-
+        if(this.room){
+            this.socket.emit(eventName,{id: this.room.id, data: data});
+        }else{
+            this.socket.emit(eventName,{data: data});
+        }
     }
 
 }

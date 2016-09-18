@@ -8,16 +8,21 @@
 </ion-navbar>
 
 <ion-content class="home">
+
+  <div class='embed-container' *ngIf="playingVideo">
+    <iframe name="video" id="video" src='{{playingVideo.url}}?rel=0&autoplay=1' frameborder='0' allowfullscreen></iframe>
+  </div>
+
   <ion-list>
-    <ion-item>
+    <ion-item *ngFor="let video of room.queue">
       <ion-row>
         <ion-col class="centered" width-33>
-          <img src="build/assets/background-landing.jpg"/>
+          <img src="{{video.thumbUrl}}"/>
         </ion-col>
         <ion-col width-67>
           <ion-row class="centered">
             <ion-col width-90>
-              <h2>Kygo - Stay (Lyric Video) ft. ...</h2>
+              <h2>{{video.title}}</h2>
               <span class="muted small">04:03</span>
               <ion-row>
                 <ion-col>
@@ -28,13 +33,13 @@
             </ion-col>
             <ion-col text-center width-10>
               <ion-col>
-                <ion-icon name="thumbs-up"></ion-icon>
+                <ion-icon name="thumbs-up" (click)="voteUp(video)"></ion-icon>
               </ion-col>
               <ion-col>
-                <span>12</span>
+                <span>{{video.voteCount}}</span>
               </ion-col>
               <ion-col>
-                <ion-icon name="thumbs-down"></ion-icon>
+                <ion-icon name="thumbs-down" (click)="voteDown(video)"></ion-icon>
               </ion-col>
             </ion-col>
           </ion-row>

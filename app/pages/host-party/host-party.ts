@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
+import {SocketService} from "../../providers/socket-service";
 
 
 
@@ -14,10 +15,13 @@ import { TabsPage } from '../tabs/tabs';
   templateUrl: 'build/pages/host-party/host-party.html',
 })
 export class HostPartyPage {
-  constructor(private nav: NavController) {}
+  constructor(private nav: NavController, private socketService: SocketService) {
+
+  }
 
 
   goToTabsPage() {
-    this.nav.setRoot(TabsPage);
+    this.socketService.isAdmin = true;
+    this.socketService.sendMessage('createRoom', { title: "Title" });
   }
 }

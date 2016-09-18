@@ -41,13 +41,13 @@
             </ion-col>
             <ion-col text-center width-10>
               <ion-col>
-                <ion-icon name="thumbs-up" (click)="voteUp(video)"></ion-icon>
+                <ion-icon name="thumbs-up" [ngStyle]="{'color': video.hasOwnVote && video.ownIsUpvote ? '#F44336' : 'black'}" (click)="voteUp(video)"></ion-icon>
               </ion-col>
               <ion-col>
-                <span>{{video.voteCount}}</span>
+                <span [ngStyle]="{'color': video.hasOwnVote ? '#F44336' : 'black'}">{{video.voteCount}}</span>
               </ion-col>
               <ion-col>
-                <ion-icon name="thumbs-down" (click)="voteDown(video)"></ion-icon>
+                <ion-icon name="thumbs-down" [ngStyle]="{'color': video.hasOwnVote && !video.ownIsUpvote? '#F44336' : 'black'}" (click)="voteDown(video)"></ion-icon>
               </ion-col>
             </ion-col>
           </ion-row>

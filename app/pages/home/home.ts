@@ -29,9 +29,11 @@ export class HomePage {
 
     this.playLogic();
 
-    this.events.subscribe("roomUpdated", room =>{
+    this.events.subscribe("roomUpdated", room => {
+      console.log('roomUpdated!');
       this.room = this.socketService.room;
       this.playLogic();
+      this.matchVotes();
     });
 
     if (this.room.hasBeacon) {
@@ -41,7 +43,19 @@ export class HomePage {
     }
   }
 
-  public playLogic(){
+  public matchVotes() {
+    console.log('matching votes');
+    for(var i = 0; this.localVotes.length; i++) {
+      let match = this.room.queue.find((item) => { return item.globalVideoId === this.localVotes[i].id});
+      if (match) {
+        match.hasOwnVote = true;
+        match.ownIsUpvote = this.localVotes[i].isUpvote;
+        console.log(match.globalVideoId + ' has ' + this.localVotes[i].isUpvote);
+      }
+    }
+  }
+
+  public playLogic() {
     console.log('check for play');
     console.log('is admin: ' + this.socketService.isAdmin);
     if(this.socketService.isAdmin && this.room.queue.length > 0 && typeof this.playingVideo === 'undefined'){
@@ -50,41 +64,40 @@ export class HomePage {
     }
   }
 
-  private addToLocalVotes(globalVideoId, isUpvote) {
+  private addToLocalVotes(globalVideoId, isUpvote, callback) {
     console.log('Add to local votes', this.localVotes);
     let localVote = this.localVotes.find((vote) => { return vote.id === globalVideoId });
     if (!localVote) {
       console.log('Doesnt have vote');
       this.localVotes.push({id: globalVideoId, isUpvote: isUpvote});
-      return true;
-    } else if (localVote.isUpvote !== isUpvote) {
-      console.log('updating vote');
+      callback(1);
+    } else {
+      console.log('same vote');
       for(var i = 0; this.localVotes.length; i++) {
         if (this.localVotes[i].id === globalVideoId) {
           this.localVotes.splice(i, 1);
         }
       }
-      return true;
-    } else {
-      console.log('same vote');
-      return false;
+      callback(-1);
     }
   }
 
   public voteUp(video:Video){
     console.log('upvote');
     video.voteValue = 1;
-    if (this.addToLocalVotes(video.globalVideoId, true)) {
+    this.addToLocalVotes(video.globalVideoId, true, (data) => {
+      video.voteValue = data;
       this.socketService.sendMessage("addVote", video);
-    }
+    });
   }
 
   public voteDown(video:Video){
     console.log('downvote');
     video.voteValue = -1;
-    if (this.addToLocalVotes(video.globalVideoId, false)) {
+    this.addToLocalVotes(video.globalVideoId, false, (data) => {
+      video.voteValue = data;
       this.socketService.sendMessage("addVote", video);
-    }
+    });
   }
 
   public goToSearchPage(){

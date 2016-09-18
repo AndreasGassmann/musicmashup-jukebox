@@ -16,6 +16,22 @@
   ion-label {
     margin: 0;
   }
+  .onboarding {
+    background-image: url('../assets/MusicMashUpOnboarding.jpg');
+    background-size: cover;
+    background-position: 50%;
+    height:100%;
+  }
+  .onboarding ion-row {
+    height: 100%;
+    padding-bottom: 128px;
+  }
+  .onboarding-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
 
 .centered{
   display: flex;

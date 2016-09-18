@@ -3,73 +3,74 @@
 </ion-navbar>
 
 <ion-content padding class="chat">
-
-    <!-- No Username
+    <span *ngIf="!hasUsername">
         <ion-row>
-        <ion-col text-center>
-            <i class="material-icons userlogin">face</i>
-        </ion-col>
-    </ion-row>
-    <ion-row>
-        <p>Choose a username and you will be able to chat with your friends.</p>
-    </ion-row>
-    <ion-row>
-        <ion-col width-100>
-            <ion-item>
-                <ion-label floating>Username</ion-label>
-                <ion-input primary type="text"></ion-input>
-            </ion-item>
-        </ion-col>
-    </ion-row>
-    <ion-row>
-        <ion-col text-center>
-                <button primary width-100>
+            <ion-col text-center>
+                <i class="material-icons userlogin">face</i>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <p>Choose a username and you will be able to chat with your friends.</p>
+        </ion-row>
+        <ion-row>
+            <ion-col width-100>
+                <ion-item>
+                    <ion-label floating>Username</ion-label>
+                    <ion-input [(ngModel)]="userName" primary type="text"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                <button primary width-100 (click)="setUsername()">
                     <ion-icon name="send"></ion-icon>
                     <span>Let's chat!</span>
                 </button>
-        </ion-col>
-    </ion-row>
-    -->
-
-    <ion-row *ngFor="let message of messages" class="message-wrap">
-    </ion-row>
-
-    <div *ngFor="let message of room.messages">
-    <ion-row *ngIf="!message.isEvent" class="message-wrap">
-        <ion-col width-90 offset-10 *ngIf="message.userId == socketId">
-            <div class="triangle-right"></div>
-            <ion-col class="message-own" >
-                {{message.message}}
             </ion-col>
-            <ion-col offset-50>
-                <span class="muted small">{{message.userName}}{{message.timestamp}}</span>
-            </ion-col>
-        </ion-col>
+        </ion-row>
+    </span>
 
-      <ion-col width-10 *ngIf="message.userId !== socketId">
-        <ion-icon class="avatar" name="person"></ion-icon>
-      </ion-col>
-      <ion-col width-90 *ngIf="message.userId !== socketId">
-        <div class="triangle-left"></div>
-        <ion-col class="message" >
-          {{message.message}}
-        </ion-col>
-        <ion-col>
-          <span class="muted small">{{message.userName}} {{message.timestamp | date:'d.m.y'}}</span>
-        </ion-col>
-      </ion-col>
-    </ion-row>
+    <span *ngIf="hasUsername">
+        <ion-row *ngFor="let message of messages" class="message-wrap">
+        </ion-row>
 
-    <ion-row *ngIf="message.isEvent" class="events message-wrap" >
-        <span>{{message.userName}}</span>
-        <span class="muted">{{message.action}}</span>
-        <span primary class="overflow-large">{{message.videoName}}</span>
-    </ion-row>
-    </div>
+        <div *ngFor="let message of room.messages">
+            <ion-row *ngIf="!message.isEvent" class="message-wrap">
+                <ion-col width-90 offset-10 *ngIf="message.userId == socketId">
+                    <div class="triangle-right"></div>
+                    <ion-col class="message-own" >
+                        {{message.message}}
+                    </ion-col>
+                    <ion-col offset-50>
+                        <span class="muted small">{{message.userName}}{{message.timestamp}}</span>
+                    </ion-col>
+                </ion-col>
+
+                <ion-col width-10 *ngIf="message.userId !== socketId">
+                    <ion-icon class="avatar" name="person"></ion-icon>
+                </ion-col>
+                <ion-col width-90 *ngIf="message.userId !== socketId">
+                    <div class="triangle-left"></div>
+                    <ion-col class="message" >
+                        {{message.message}}
+                    </ion-col>
+                    <ion-col>
+                        <span class="muted small">{{message.userName}} {{message.timestamp | date:'d.m.y'}}</span>
+                    </ion-col>
+                </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="message.isEvent" class="events message-wrap" >
+                <span>{{message.userName}}</span>
+                <span class="muted">{{message.action}}</span>
+                <span primary class="overflow-large">{{message.videoName}}</span>
+            </ion-row>
+        </div>
+    </span>
 
 </ion-content>
 
-<ion-footer keyboard-attach class="bar-stable item-input-inset">
+<ion-footer *ngIf="hasUsername" keyboard-attach class="bar-stable item-input-inset">
     <ion-row>
         <ion-col width-80>
             <ion-label class="item-input-wrapper">

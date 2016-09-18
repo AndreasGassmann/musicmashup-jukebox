@@ -16,9 +16,11 @@ import {SocketService} from "../../providers/socket-service";
 })
 export class HostPartyPage {
   beacon: boolean;
+  YTMusic: boolean;
 
   constructor(private nav: NavController, private socketService: SocketService) {
-
+    this.beacon = true;
+    this.YTMusic = true;
   }
 
 

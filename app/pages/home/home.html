@@ -9,10 +9,10 @@
 
 <ion-content class="home">
 
-<div class="onboarding" *ngIf="room.queue.length == 0 && !playingVideo">
+<div class="onboarding" *ngIf="room.queue.length == 0 && !playingVideo && room.history.length == 0">
   <ion-row width-100>
     <ion-col class="onboarding-center" text-center>
-      <h5>Start adding songs to the queue.</h5>
+      <h5>Start adding songs to the queue<br> and enjoy music with your friends.</h5>
     </ion-col>
   </ion-row>
 </div>
@@ -20,6 +20,20 @@
   <div class='embed-container'>
     <div id="video"></div>
   </div>
+
+
+  <div *ngFor="let item of room.history;  let i=index">
+    <div *ngIf="i<2">
+      {{item.title}}
+    </div>
+  </div>
+
+  <ion-row *ngIf="room.queue.length == 0 && playingVideo" class="no-search muted" text-center>
+    <ion-col>
+      <i class="material-icons">audiotrack</i>
+      <h5>Only 1 song in the queue, let's add more!</h5>
+    </ion-col>
+  </ion-row>
 
   <ion-list>
     <ion-item *ngFor="let video of room.queue">
@@ -41,13 +55,13 @@
             </ion-col>
             <ion-col text-center width-10>
               <ion-col>
-                <ion-icon name="thumbs-up" (click)="voteUp(video)"></ion-icon>
+                <ion-icon name="thumbs-up" [ngStyle]="{'color': video.hasOwnVote && video.ownIsUpvote ? '#F44336' : 'black'}" (click)="voteUp(video)"></ion-icon>
               </ion-col>
               <ion-col>
-                <span>{{video.voteCount}}</span>
+                <span [ngStyle]="{'color': video.hasOwnVote ? '#F44336' : 'black'}">{{video.voteCount}}</span>
               </ion-col>
               <ion-col>
-                <ion-icon name="thumbs-down" (click)="voteDown(video)"></ion-icon>
+                <ion-icon name="thumbs-down" [ngStyle]="{'color': video.hasOwnVote && !video.ownIsUpvote? '#F44336' : 'black'}" (click)="voteDown(video)"></ion-icon>
               </ion-col>
             </ion-col>
           </ion-row>

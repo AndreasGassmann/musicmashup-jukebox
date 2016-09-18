@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Modal } from 'ionic-angular';
 import {SocketService} from "../../providers/socket-service";
+import {InfoModal} from "../../modals/info/info";
 
 /*
   Generated class for the HistoryPage page.
@@ -15,9 +16,14 @@ export class HistoryPage {
 
   room:any;
 
-  constructor(private nav: NavController, private socketService: SocketService) {
+  constructor(private navController: NavController, private socketService: SocketService) {
     this.room = socketService.room;
 
     console.log(this.room.history);
+  }
+
+  presentInfoModal() {
+    console.log(this.socketService.room);
+    this.navController.present(Modal.create(InfoModal, {roomName: this.socketService.room.id}));
   }
 }

@@ -66,7 +66,8 @@ export class HomePage {
   }
 
   presentInfoModal() {
-    this.navController.present(Modal.create(InfoModal, {roomName: '1'}));
+    console.log(this.socketService.room);
+    this.navController.present(Modal.create(InfoModal, {roomName: this.socketService.room.id}));
   }
 }
 

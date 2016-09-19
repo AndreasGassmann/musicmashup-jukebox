@@ -14,4 +14,5 @@ export class Video {
   voteValue:number;
   globalVideoId:number;
   duration:string;
+  channelTitle: string;
 }

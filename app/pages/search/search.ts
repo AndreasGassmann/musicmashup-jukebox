@@ -57,6 +57,7 @@ export class SearchPage {
     video.videoId = item.id;
     video.voteCount = 0;
     video.duration = item.contentDetails.duration;
+    video.channelTitle = item.snippet.channelTitle;
 
     this.socketService.sendMessage("addVideo", video);
 

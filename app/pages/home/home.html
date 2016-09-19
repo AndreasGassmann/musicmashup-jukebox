@@ -46,11 +46,11 @@
           <ion-row class="centered">
             <ion-col width-90>
               <h2 class="overflow">{{video.title}}</h2>
-              <span class="muted small">04:03</span>
+              <span class="muted small">{{video.duration | VideoDurationPipe}}</span>
               <ion-row>
                 <ion-col>
                   <img class="avatar" src="build/assets/background-landing.jpg"/>
-                  <span class="muted small">Pascal Brun</span>
+                  <span class="muted small">{{video.channelTitle}}</span>
                 </ion-col>
               </ion-row>
             </ion-col>

@@ -7,6 +7,7 @@ import {SocketService} from "../../providers/socket-service";
 import {Events} from "ionic-angular/index";
 import {YoutubeVideo} from "../../classes/YoutubeVideo";
 import {Video} from "../../classes/Video";
+import {VideoDurationPipe} from "../../pipe/VideoDurationPipe";
 declare var document: any;
 declare var YT: any;
 declare var target: any;
@@ -15,7 +16,8 @@ declare var target: any;
 
 @Component({
   templateUrl: 'build/pages/home/home.html',
-  providers: [BeaconService]
+  providers: [BeaconService],
+  pipes: [VideoDurationPipe]
 })
 export class HomePage {
 

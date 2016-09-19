@@ -3,88 +3,89 @@ import { NavController, Modal } from 'ionic-angular';
 import {SocketService} from "../../providers/socket-service";
 import {MessageTimePipe} from "../../pipe/MessageTimePipe";
 import {InfoModal} from "../../modals/info/info";
+import {Content} from "ionic-angular/index";
 
 /*
-  Generated class for the ChatPage page.
+ Generated class for the ChatPage page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+ See http://ionicframework.com/docs/v2/components/#navigation for more info on
+ Ionic pages and navigation.
+ */
 @Component({
-  templateUrl: 'build/pages/chat/chat.html',
-  pipes: [MessageTimePipe]
+    templateUrl: 'build/pages/chat/chat.html',
+    pipes: [MessageTimePipe]
 })
 export class ChatPage implements OnInit, AfterViewChecked {
-  @ViewChild('scroll-content') private myScrollContainer: ElementRef;
-  room: any;
-  message:string;
-  socketId:string;
-  userName: string;
-  hasUsername: boolean;
+    @ViewChild(Content) content:Content;
 
-  constructor(private navController: NavController, private socketService:SocketService) {
-    this.room = this.socketService.room;
-    this.socketId = this.socketService.socketId;
-    this.userName = '';
-    this.hasUsername = false;
+    room:any;
+    message:string;
+    socketId:string;
+    userName:string;
+    hasUsername:boolean;
 
-    console.log(this.room.messages);
-    console.log(this.socketId);
-  }
-  ngOnInit() { 
-        console.log('on init');
-        this.scrollToBottom();
-  }
+    constructor(private navController:NavController, private socketService:SocketService) {
+        this.room = this.socketService.room;
+        this.socketId = this.socketService.socketId;
+        this.userName = '';
+        this.hasUsername = false;
 
-  ngAfterViewChecked() {
-        console.log('after view checked');
-        this.scrollToBottom();        
-  }
-
-  scrollToBottom(): void {
-    console.log('scroll to bottom');
-    try {
-        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    } catch(err) { }                 
-  }
-
-
-  onKey($event){
-    /* check if Enter key */
-    if($event.which === 13){
-      this.sendMessage();
+        console.log(this.room.messages);
+        console.log(this.socketId);
     }
-  }
 
-  onKeyUsername($event){
-     if($event.which === 13){
-      this.setUsername();
-    } 
-  }
+    ngOnInit() {
+        try {
+            this.content.scrollToBottom();
+        } catch (e) {
 
-  setUsername() {
-    if (this.userName.length != 0) {
-      this.hasUsername = true;
+        }
     }
-  }
 
-  sendMessage(){
-    if(this.message != "") {
-      this.socketService.sendMessage("chatMessage", {
-        id: 1,
-        userId: this.socketService.socketId,
-        userName: this.userName,
-        message: this.message,
-        timestamp: Date.now(),
-        avatarUrl: '',
-        isOwnMessage: true
-      });
-      this.message = "";
+    ngAfterViewChecked() {
+        try {
+            this.content.scrollToBottom();
+        } catch (e) {
+
+        }
     }
-  }
 
-  presentInfoModal() {
-    console.log(this.socketService.room);
-    this.navController.present(Modal.create(InfoModal, {roomName: this.socketService.room.id}));
-  }
+    onKey($event) {
+        /* check if Enter key */
+        if ($event.which === 13) {
+            this.sendMessage();
+        }
+    }
+
+    onKeyUsername($event) {
+        if ($event.which === 13) {
+            this.setUsername();
+        }
+    }
+
+    setUsername() {
+        if (this.userName.length != 0) {
+            this.hasUsername = true;
+        }
+    }
+
+    sendMessage() {
+        if (this.message != "") {
+            this.socketService.sendMessage("chatMessage", {
+                id: 1,
+                userId: this.socketService.socketId,
+                userName: this.userName,
+                message: this.message,
+                timestamp: Date.now(),
+                avatarUrl: '',
+                isOwnMessage: true
+            });
+            this.message = "";
+        }
+    }
+
+    presentInfoModal() {
+        console.log(this.socketService.room);
+        this.navController.present(Modal.create(InfoModal, {roomName: this.socketService.room.id}));
+    }
 }

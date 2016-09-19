@@ -22,6 +22,7 @@ export class HomePage {
   localVotes: Array<{id: number, isUpvote: boolean}>;
   room:any;
   playingVideo:any;
+  player:any;
 
   constructor(private navController: NavController, private beaconService: BeaconService, private socketService: SocketService, public events: Events) {
     this.room = this.socketService.room;
@@ -64,9 +65,9 @@ export class HomePage {
 
       // Replace the 'video' element with an <iframe> and
       // YouTube player after the API code downloads.
-        let self = this;
+      let self = this;
 
-      var player = new YT.Player('video', {
+      this.player = new YT.Player('video', {
           autoplay: 1,
           height: '390',
           width: '640',
@@ -81,14 +82,19 @@ export class HomePage {
                 self.socketService.sendMessage("playingVideo", self.room.queue[0]);
                 console.log('start next video: ' + self.room.queue[0].title);
                 
-                this.playingVideo = self.room.queue[0];
-                player.loadVideoById(this.playingVideo.videoId);
+                this.playNextSong();
               }
             }
           }
         });
       
     }
+  }
+
+  public playNextSong() {
+    this.playingVideo = this.room.queue[0];
+    this.player.loadVideoById(this.playingVideo.videoId);
+    this.socketService.sendMessage("playingVideo", this.playingVideo);
   }
 
   private addToLocalVotes(globalVideoId, isUpvote, callback) {

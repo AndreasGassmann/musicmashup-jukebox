@@ -21,6 +21,7 @@
     <div id="video"></div>
   </div>
 
+  <button *ngIf="room.queue.length !== 0" (click)="playNextSong()">Play next song</button>
 <!--
   <div ngIf="!playingVideo" *ngFor="let item of room.history;  let i=index">
     <div *ngIf="i<2">

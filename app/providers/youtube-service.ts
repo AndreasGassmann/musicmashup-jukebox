@@ -18,7 +18,6 @@ export class YoutubeService {
             params.set('type', "video");
             params.set('videoEmbeddable', "true");
             params.set('videoSyndicated', "true");
-            params.set('eventType', "completed"); //only include completed videos, no broadcasts/upcoming streams
             params.set('videoCategoryId', "10"); // only music videos
             params.set('maxResults', "30");
             params.set('part', "id");

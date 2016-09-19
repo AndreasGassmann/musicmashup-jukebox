@@ -17,7 +17,7 @@
   </ion-row>
 </div>
 
-  <div class='embed-container'>
+  <div class='embed-container' *ngIf="socketService.isAdmin">
     <div id="video"></div>
   </div>
 

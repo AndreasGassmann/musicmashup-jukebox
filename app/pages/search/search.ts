@@ -33,8 +33,9 @@ export class SearchPage {
     if(this.searchInput == ""){
       this.searchResults = [];
     }else {
-      this.youtubeService.searchVideo(this.searchInput).then(items => {
-        this.searchResults = items.items;
+      this.youtubeService.searchVideo(this.searchInput).then(result => {
+        console.log(result);
+        this.searchResults = result.videos.items;
       });
     }
   }

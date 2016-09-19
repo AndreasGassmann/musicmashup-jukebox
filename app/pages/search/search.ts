@@ -5,6 +5,8 @@ import {YoutubeVideo} from "../../classes/YoutubeVideo";
 import {Video} from "../../classes/Video";
 import {NavOptions} from "ionic-angular/index";
 import {SocketService} from "../../providers/socket-service";
+import {Keyboard} from 'ionic-native';
+import {Focuser} from "../../components/focuser/focuser";
 
 /*
   Generated class for the SearchPage page.
@@ -14,8 +16,10 @@ import {SocketService} from "../../providers/socket-service";
 */
 @Component({
   templateUrl: 'build/pages/search/search.html',
-  providers: [YoutubeService]
+  providers: [YoutubeService],
+  directives: [Focuser]
 })
+
 export class SearchPage {
 
   searchInput:string;
@@ -51,6 +55,8 @@ export class SearchPage {
     video.voteCount = 0;
 
     this.socketService.sendMessage("addVideo", video);
+
+    Keyboard.close();
 
     this.nav.pop();
   }

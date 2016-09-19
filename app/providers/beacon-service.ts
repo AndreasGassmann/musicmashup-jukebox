@@ -14,15 +14,6 @@ export class BeaconService {
 
     constructor(private socketService: SocketService) {
 
-        if (typeof cordova !== 'undefined') {
-            // Request permission to use location on iOS
-            IBeacon.requestAlwaysAuthorization();
-            // create a new delegate and register it with the native layer
-            this.delegate = IBeacon.Delegate();
-
-            this.beaconRegion = IBeacon.BeaconRegion('MusicMashupBeacon','00000000-0000-0000-0000-000000000000');
-        }
-
     }
 
     createLocalNotification(roomId) {
@@ -36,52 +27,74 @@ export class BeaconService {
     };
 
     startScanning() {
-        // Subscribe to some of the delegate's event handlers
 
-        this.delegate.didRangeBeaconsInRegion()
-            .subscribe(
-                data => {
-                    console.log('didRangeBeaconsInRegion: ', data);
-                    console.log('Has Beacons:', data.beacons);
-                },
-                error => console.error()
-            );
+        if (typeof cordova !== 'undefined') {
+            // Request permission to use location on iOS
+            IBeacon.requestAlwaysAuthorization();
+            // create a new delegate and register it with the native layer
 
-        this.delegate.didStartMonitoringForRegion()
-            .subscribe(
-                data => console.log('didStartMonitoringForRegion: ', data),
-                error => console.error()
-            );
 
-        this.delegate.didEnterRegion()
-            .subscribe(
-                data => {
-                    console.log('didEnterRegion: ', data);
-                    if (data.beacons) {
-                        this.createLocalNotification(data.beacons[0].minor);
-                        this.socketService.sendMessage('joinRoom', { id: data.beacons[0].minor });
+
+            // Subscribe to some of the delegate's event handlers
+
+            this.delegate = IBeacon.Delegate();
+            this.beaconRegion = IBeacon.BeaconRegion('MusicMashupBeacon', '00000000-0000-0000-0000-000000000000', 0, 52);
+
+
+            /*
+            this.delegate.didRangeBeaconsInRegion()
+                .subscribe(
+                    data => {
+                        console.log('didRangeBeaconsInRegion: ', data);
+                        console.log('Has Beacons:', data.beacons);
+                    },
+                    error => console.error()
+                );
+                */
+
+            this.delegate.didStartMonitoringForRegion()
+                .subscribe(
+                    data => console.log('didStartMonitoringForRegion: ', data),
+                    error => console.error()
+                );
+
+            this.delegate.didEnterRegion()
+                .subscribe(
+                    data => {
+                        console.log('didEnterRegion: ', data);
+                        alert(JSON.stringify(data));
+                        if (data.beacons) {
+                            this.createLocalNotification(data.beacons[0].minor);
+                            this.socketService.sendMessage('joinRoom', {id: data.beacons[0].minor});
+                        }
                     }
-                }
-            );
+                );
 
-        this.delegate.didExitRegion()
-            .subscribe(
-                data => {
-                    console.log('didExitRegion', data);
-                }
-            );
+            this.delegate.didExitRegion()
+                .subscribe(
+                    data => {
+                        console.log('didExitRegion', data);
+                    }
+                );
 
-        IBeacon.startMonitoringForRegion(this.beaconRegion)
-            .then(
-                () => console.log('Native layer recieved the request to monitoring'),
-                error => console.error('Native layer failed to begin monitoring: ', error)
-            );
 
-        IBeacon.startRangingBeaconsInRegion(this.beaconRegion)
-            .then(
-                () => console.log('StartRangingBeaconsInRegions'),
-                error => console.error('StartRangingBeaconsInRegion', error)
-            );
+            IBeacon.startMonitoringForRegion(this.beaconRegion)
+                .then(
+                    () => console.log('Native layer recieved the request to monitoring'),
+                    error => console.error('Native layer failed to begin monitoring: ', error)
+                );
+
+
+
+
+            /*
+            IBeacon.startRangingBeaconsInRegion(this.beaconRegion)
+                .then(
+                    () => console.log('StartRangingBeaconsInRegions'),
+                    error => console.error('StartRangingBeaconsInRegion', error)
+                );
+                */
+        }
     }
 
     stopMonitoring() {
@@ -93,10 +106,7 @@ export class BeaconService {
     }
 
     createLocalBeacon(roomId) {
-
-        this.region = IBeacon.BeaconRegion('MusicMashupBeacon', '00000000-0000-0000-0000-000000000000', 0, roomId, true);
-
-        IBeacon.startAdvertising(this.region, 100).then(
+        IBeacon.startAdvertising( IBeacon.BeaconRegion('MusicMashupBeacon', '00000000-0000-0000-0000-000000000000', 0, roomId, true), 100).then(
             (data) => {
                 console.log('Started advertising');
                 console.log(data);
@@ -112,4 +122,5 @@ export class BeaconService {
             }
         );
     }
+
 }

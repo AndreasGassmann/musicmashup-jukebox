@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import {SocketService} from "../../providers/socket-service";
 import {BarcodeService} from "../../providers/barcode-service";
+import {TextInput} from "ionic-angular/index";
+import {Focuser} from "../../components/focuser/focuser";
+import {Keyboard} from 'ionic-native';
 
 /*
   Generated class for the JoinPartyPage page.
@@ -12,16 +15,19 @@ import {BarcodeService} from "../../providers/barcode-service";
 */
 @Component({
   templateUrl: 'build/pages/join-party/join-party.html',
+  directives: [Focuser]
 })
 export class JoinPartyPage {
-
   id:string;
 
+
   constructor(private nav: NavController, private socketService: SocketService, private barcodeService: BarcodeService) {
-  }
+    }
+
 
   goToTabsPage() {
     this.socketService.sendMessage('joinRoom', { id: Number(this.id) });
+    Keyboard.close();
   }
 
   onKey($event){

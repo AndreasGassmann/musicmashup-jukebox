@@ -4,6 +4,7 @@ import {SocketService} from "../../providers/socket-service";
 import {MessageTimePipe} from "../../pipe/MessageTimePipe";
 import {InfoModal} from "../../modals/info/info";
 import {Content} from "ionic-angular/index";
+import {Focuser} from "../../components/focuser/focuser";
 
 /*
  Generated class for the ChatPage page.
@@ -13,7 +14,8 @@ import {Content} from "ionic-angular/index";
  */
 @Component({
     templateUrl: 'build/pages/chat/chat.html',
-    pipes: [MessageTimePipe]
+    pipes: [MessageTimePipe],
+    directives: [Focuser]
 })
 export class ChatPage implements OnInit, AfterViewChecked {
     @ViewChild(Content) content:Content;

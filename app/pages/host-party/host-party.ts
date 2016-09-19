@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import {SocketService} from "../../providers/socket-service";
+import {Keyboard} from 'ionic-native';
+import {Focuser} from "../../components/focuser/focuser";
 
 
 
@@ -13,6 +15,7 @@ import {SocketService} from "../../providers/socket-service";
 */
 @Component({
   templateUrl: 'build/pages/host-party/host-party.html',
+  directives: [Focuser]
 })
 export class HostPartyPage {
   beacon: boolean;
@@ -21,12 +24,14 @@ export class HostPartyPage {
   constructor(private nav: NavController, private socketService: SocketService) {
     this.beacon = true;
     this.YTMusic = true;
+
   }
 
 
   goToTabsPage() {
     this.socketService.isAdmin = true;
     this.socketService.sendMessage('createRoom', { title: "Title", hasBeacon: this.beacon });
+    Keyboard.close();
   }
 
   

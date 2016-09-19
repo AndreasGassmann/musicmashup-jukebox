@@ -24,9 +24,7 @@ export class HostPartyPage {
   constructor(private nav: NavController, private socketService: SocketService) {
     this.beacon = true;
     this.YTMusic = true;
-
   }
-
 
   goToTabsPage() {
     this.socketService.isAdmin = true;

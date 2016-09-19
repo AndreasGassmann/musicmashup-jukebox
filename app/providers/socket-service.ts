@@ -6,12 +6,9 @@ import { App } from 'ionic-angular';
 import {TabsPage} from "../pages/tabs/tabs";
 import { Events } from 'ionic-angular';
 
-
 //import * as io from 'socket.io-client';
 
 declare var io: any;
-
-
 
 @Injectable()
 export class SocketService {
@@ -93,16 +90,19 @@ export class SocketService {
 
         this.socket.on("message", (msg) => {
             this.socketObserver.next({ category: 'message', message: msg });
-        }); //end of socket.on('message')
-
+        });
     }
 
     sendMessage(eventName, data) {
-        if(this.room){
+        if(this.room) {
             this.socket.emit(eventName,{id: this.room.id, data: data});
-        }else{
+        } else {
             this.socket.emit(eventName,{data: data});
         }
+    }
+
+    sendPlainMessage(eventName, data) {
+        this.socket.emit(eventName, data);
     }
 
 }

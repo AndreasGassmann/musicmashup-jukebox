@@ -7,6 +7,7 @@ import {NavOptions} from "ionic-angular/index";
 import {SocketService} from "../../providers/socket-service";
 import {Keyboard} from 'ionic-native';
 import {Focuser} from "../../components/focuser/focuser";
+import {VideoDurationPipe} from "../../pipe/VideoDurationPipe";
 
 /*
   Generated class for the SearchPage page.
@@ -17,6 +18,7 @@ import {Focuser} from "../../components/focuser/focuser";
 @Component({
   templateUrl: 'build/pages/search/search.html',
   providers: [YoutubeService],
+  pipes: [VideoDurationPipe],
   directives: [Focuser]
 })
 
@@ -35,7 +37,7 @@ export class SearchPage {
     }else {
       this.youtubeService.searchVideo(this.searchInput).then(result => {
         console.log(result);
-        this.searchResults = result.videos.items;
+        this.searchResults = result.items;
       });
     }
   }
@@ -51,9 +53,10 @@ export class SearchPage {
     video.datetime_added = new Date();
     video.played = false;
     video.thumbUrl = item.snippet.thumbnails.default.url;
-    video.url = "https://www.youtube.com/embed/" + item.id.videoId;
-    video.videoId = item.id.videoId;
+    video.url = "https://www.youtube.com/embed/" + item.id;
+    video.videoId = item.id;
     video.voteCount = 0;
+    video.duration = item.contentDetails.duration;
 
     this.socketService.sendMessage("addVideo", video);
 

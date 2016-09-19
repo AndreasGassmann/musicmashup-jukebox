@@ -1,10 +1,8 @@
 
 export class YoutubeVideo {
-    id:{
-        kind:string;
-        videoId:string;
-    };
-    snippet:{
+    id: string;
+    contentDetails: YoutubeVideoContentDetails;
+    snippet: {
         channelTitle:string;
         description:string;
         thumbnails:{

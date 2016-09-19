@@ -28,6 +28,11 @@
           <h2 class="overflow-large">{{ item.snippet.title }}</h2>
           <ion-row>
             <ion-col class="no-padding">
+              <p>{{ item.contentDetails.duration | VideoDurationPipe }}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="no-padding">
               <p>{{ item.snippet.channelTitle }}</p>
             </ion-col>
           </ion-row>

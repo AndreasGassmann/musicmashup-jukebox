@@ -92,6 +92,7 @@ export class SocketService {
 
     reset(){
         this.socket.disconnect();
+        this.socket.isAdmin = false;
         this.initialize();
     }
 

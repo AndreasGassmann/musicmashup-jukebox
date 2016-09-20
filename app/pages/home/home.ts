@@ -28,6 +28,14 @@ export class HomePage {
   constructor(private navController: NavController, private socketService: SocketService, public events: Events) {
     this.localVotes = [];
     this.room = this.socketService.room;
+    this.playLogic();
+    this.matchVotes();
+
+    this.events.subscribe("roomUpdated", room => {
+      this.room = this.socketService.room;
+      this.playLogic();
+      this.matchVotes();
+    });
 
     /*
     if (this.room.hasBeacon) {

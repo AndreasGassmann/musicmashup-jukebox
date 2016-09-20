@@ -20,17 +20,19 @@ export class TabsPage {
     // this tells the tabs component which Pages
     // should be each tab's root Page
 
-    this.socketService.sendMessage("joinRoom", {id: Number(this.navParams.data.id)});
-
-    this.room = this.socketService.room;
     this.events.subscribe("roomUpdated", room => {
-
       this.room = this.socketService.room;
       this.tab1Root = HomePage;
       this.tab2Root = ChatPage;
       this.tab3Root = HistoryPage;
     });
 
+    if(this.navParams.data.id){
+      this.socketService.sendMessage("joinRoom", {id: Number(this.navParams.data.id)});
+    }else{
+      // TODO pass parameters
+      this.socketService.sendMessage('createRoom', { title: "Title", hasBeacon: true });
+    }
 
   }
 }

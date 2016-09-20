@@ -3,13 +3,11 @@ import { NavController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { BarcodeService } from "../../providers/barcode-service";
 import { HostPartyPage } from '../host-party/host-party';
-import {Focuser} from "../../components/focuser/focuser";
 import {Keyboard} from 'ionic-native';
 
 
 @Component({
     templateUrl: 'build/pages/landing/landing.html',
-    directives: [Focuser]
 })
 export class LandingPage {
 
@@ -36,6 +34,13 @@ export class LandingPage {
             id: this.id
         });
         Keyboard.close();
+    }
+
+    onKey($event) {
+        /* check if Enter key */
+        if ($event.which === 13) {
+            this.goToJoinPartyPage();
+        }
     }
 
 }

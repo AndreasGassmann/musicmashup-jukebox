@@ -35,7 +35,7 @@
         <ion-col width-67 offset-10>
             <ion-item class="transparent">
                 <ion-label floating>Room ID</ion-label>
-                <ion-input type="text" focuser [(ngModel)]="id" ></ion-input>
+                <ion-input type="text" (keyup)="onKey($event)" [(ngModel)]="id" ></ion-input>
             </ion-item>
          </ion-col>
         <ion-col width-20 class="end">

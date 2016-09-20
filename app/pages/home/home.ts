@@ -15,7 +15,6 @@ declare var target: any;
 
 @Component({
   templateUrl: 'build/pages/home/home.html',
-  providers:[SocketService],
   pipes: [VideoDurationPipe]
 })
 export class HomePage {
@@ -30,15 +29,6 @@ export class HomePage {
     this.localVotes = [];
     this.room = this.socketService.room;
 
-    this.events.subscribe("roomUpdated", room => {
-      console.log(this.socketService.room);
-      this.room = this.socketService.room;
-      this.playLogic();
-      this.matchVotes();
-
-    });
-
-
     /*
     if (this.room.hasBeacon) {
       this.beaconService.stopMonitoring().then(() => {
@@ -46,8 +36,6 @@ export class HomePage {
       });
     }
     */
-
-
   }
 
 

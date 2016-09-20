@@ -18,8 +18,6 @@ export class HistoryPage {
 
   constructor(private navController: NavController, private socketService: SocketService) {
     this.room = socketService.room;
-
-    console.log(this.room.history);
   }
 
   presentInfoModal() {

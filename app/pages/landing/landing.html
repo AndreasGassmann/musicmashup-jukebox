@@ -23,7 +23,7 @@
             <h3>Join a party</h3>
         </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row class="browser-hidden">
         <ion-col text-center width-10 offset-20>
             <i class="material-icons icon-padding ">filter_tilt_shift</i>
         </ion-col>
@@ -35,7 +35,7 @@
         <ion-col width-67 offset-10>
             <ion-item class="transparent">
                 <ion-label floating>Room ID</ion-label>
-                <ion-input type="text"></ion-input>
+                <ion-input type="text" focuser [(ngModel)]="id" ></ion-input>
             </ion-item>
          </ion-col>
         <ion-col width-20 class="end">
@@ -44,7 +44,7 @@
             </button>
         </ion-col>
     </ion-row>
-    <ion-row class="spacing">
+    <ion-row class="spacing" class="browser-hidden">
         <ion-col text-center>
             <button primary (click)="openScanner()">
                 <ion-icon class="icon-padding" name="qr-scanner"></ion-icon>

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, forwardRef, Inject } from '@angular/core';
 import { Storage, LocalStorage } from 'ionic-angular';
 import { IBeacon } from 'ionic-native';
 import { Delegate, BeaconRegion } from "ionic-native/dist/index";
@@ -12,7 +12,7 @@ export class BeaconService {
     region: BeaconRegion;
     beaconRegion: BeaconRegion;
 
-    constructor(private socketService: SocketService) {
+    constructor(@Inject(forwardRef(()  => SocketService)) private socketService: SocketService) {
 
     }
 

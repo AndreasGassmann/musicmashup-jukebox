@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, forwardRef, Inject } from '@angular/core';
 import { Storage, LocalStorage } from 'ionic-angular';
-import {SocketService} from "./socket-service";
+import {App} from "ionic-angular/index";
+import {TabsPage} from "../pages/tabs/tabs";
 
 declare var Scandit: any;
 
@@ -8,7 +9,7 @@ declare var Scandit: any;
 export class BarcodeService {
     picker: any;
 
-    constructor(private socketService:SocketService) {
+    constructor(private app: App) {
         if (typeof Scandit !== 'undefined') {
             Scandit.License.setAppKey("ceKIGYn3xZidfbLaDQvWRxE90mlLjhxRqTj/8Q7dGko");
             var settings = new Scandit.ScanSettings();
@@ -21,7 +22,7 @@ export class BarcodeService {
         let self = this;
             this.picker.show(function success(session) {
                     session.stopScanning();
-                    self.socketService.sendMessage('joinRoom', { id: new Number(session.newlyRecognizedCodes[0].data) });
+                self.app.getActiveNav().setRoot(TabsPage, {id: new Number(session.newlyRecognizedCodes[0].data)});
                 }, function manual(content) {
                     alert("Manual: " + content);
                 },

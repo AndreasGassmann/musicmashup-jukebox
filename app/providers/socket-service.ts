@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { App } from 'ionic-angular';
 import {TabsPage} from "../pages/tabs/tabs";
 import { Events } from 'ionic-angular';
 
@@ -23,7 +22,7 @@ export class SocketService {
     room:any;
     isAdmin:boolean = false;
 
-    constructor(private app: App, public events: Events) {
+    constructor(public events: Events) {
         this.socketService = Observable.create(observer => {
             this.socketObserver = observer;
         });
@@ -68,9 +67,7 @@ export class SocketService {
 
         this.socket.on('joinedRoom', (data) => {
             this.room = data;
-            self.app.getActiveNav().setRoot(TabsPage);
             this.events.publish("roomUpdated");
-            console.log(data);
         });
 
         this.socket.on('newChatMessage', (data) => {

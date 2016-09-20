@@ -3,7 +3,6 @@ import {Platform, ionicBootstrap} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
 import { LandingPage } from './pages/landing/landing';
-import {BeaconService} from "./providers/beacon-service";
 import {SocketService} from './providers/socket-service';
 import {BarcodeService} from "./providers/barcode-service";
 
@@ -49,4 +48,4 @@ export class MyApp {
   }
 }
 
-ionicBootstrap(MyApp, [BeaconService, BarcodeService, SocketService], {mode:'md'});
+ionicBootstrap(MyApp, [BarcodeService, SocketService], {mode:'md'});

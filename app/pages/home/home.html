@@ -1,4 +1,5 @@
-<ion-navbar primary *navbar>
+
+<ion-navbar *ngIf="room" primary *navbar>
   <ion-title>Home</ion-title>
   <ion-buttons end>
     <button (click)="presentInfoModal()">
@@ -7,7 +8,7 @@
   </ion-buttons>
 </ion-navbar>
 
-<ion-content class="home">
+<ion-content class="home" *ngIf="room">
 
 <div class="onboarding" *ngIf="room.queue.length == 0 && !playingVideo">
   <ion-row width-100>

@@ -9,8 +9,7 @@
 <ion-content padding class="landing">
     <ion-row>
         <ion-col text-center>
-            <div style="height: 32px"></div>
-            <img class="logo-placeholder" src="build/assets/mashup-icon.png"/>
+            <img class="logo" src="build/assets/mashup-icon.png"/>
         </ion-col>
     </ion-row>
     <ion-row>
@@ -24,7 +23,7 @@
             <h3>Join a party</h3>
         </ion-col>
     </ion-row>
-    <ion-row style="padding-bottom: 12px;">
+    <ion-row>
         <ion-col text-center width-10 offset-20>
             <i class="material-icons icon-padding ">filter_tilt_shift</i>
         </ion-col>
@@ -33,20 +32,28 @@
         </ion-col>
     </ion-row>
     <ion-row>
+        <ion-col width-67 offset-10>
+            <ion-item class="transparent">
+                <ion-label floating>Room ID</ion-label>
+                <ion-input type="text"></ion-input>
+            </ion-item>
+         </ion-col>
+        <ion-col width-20 class="end">
+            <button primary (click)="goToJoinPartyPage()">
+                <i class="material-icons">send</i>
+            </button>
+        </ion-col>
+    </ion-row>
+    <ion-row class="spacing">
         <ion-col text-center>
             <button primary (click)="openScanner()">
                 <ion-icon class="icon-padding" name="qr-scanner"></ion-icon>
                 <span>With QR</span>
             </button>
-            <button primary (click)="goToJoinPartyPage()">
-                <i class="material-icons icon-padding ">label</i>
-                <span>With ID</span>
-            </button>
         </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row class="spacing-large">
         <ion-col text-center>
-            <div style="height: 32px"></div>
             <h3>Be a host</h3>
         </ion-col>
     </ion-row>

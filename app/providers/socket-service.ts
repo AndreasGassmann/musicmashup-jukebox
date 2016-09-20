@@ -90,6 +90,11 @@ export class SocketService {
         });
     }
 
+    reset(){
+        this.socket.disconnect();
+        this.initialize();
+    }
+
     sendMessage(eventName, data) {
         if(this.room) {
             this.socket.emit(eventName,{id: this.room.id, data: data});

@@ -31,9 +31,6 @@ export class ChatPage implements OnInit, AfterViewChecked {
         this.socketId = this.socketService.socketId;
         this.userName = '';
         this.hasUsername = false;
-
-        console.log(this.room.messages);
-        console.log(this.socketId);
     }
 
     ngOnInit() {

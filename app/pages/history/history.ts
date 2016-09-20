@@ -21,7 +21,6 @@ export class HistoryPage {
   }
 
   presentInfoModal() {
-    console.log(this.socketService.room);
     this.navController.present(Modal.create(InfoModal, {roomName: this.socketService.room.id}));
   }
 }

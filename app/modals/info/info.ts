@@ -23,6 +23,7 @@ export class InfoModal {
   leaveRoom() {
     this.viewCtrl.dismiss();
     this.socketService.sendPlainMessage('leaveRoom', () => {
+      this.socketService.reset();
       this.navController.setRoot(LandingPage);
     });
   }

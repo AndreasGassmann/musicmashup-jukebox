@@ -21,20 +21,52 @@
     <div id="video"></div>
   </div>
 
-  <button *ngIf="room.queue.length !== 0" (click)="playNextSong()">Play next song</button>
-<!--
+    <ion-row *ngIf="playingVideo" class="player">
+      <ion-col width-67>
+        <ion-row>
+          <ion-col>
+            <h2 class="overflow">Video Title</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="centered">
+            <img class="avatar" src="build/assets/background-landing.jpg"/>
+            <span class="muted small">Pascal Brun</span>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col width-33 class="centered">
+            <ion-row>
+              <!-- if paused!
+              <button dark clear>
+                <i class="material-icons">play_arrow</i>
+              </button>
+             -->
+              <button dark clear>
+                <i class="material-icons">pause</i>
+              </button>
+              <button dark clear (click)="playNextSong()">
+                <i class="material-icons">skip_next</i>
+              </button>
+            </ion-row>
+      </ion-col>
+    </ion-row>
+  <!--
   <div ngIf="!playingVideo" *ngFor="let item of room.history;  let i=index">
     <div *ngIf="i<2">
       {{item.title}}
     </div>
   </div>
 -->
+
   <ion-row *ngIf="room.queue.length == 0 && playingVideo" class="no-search muted" text-center>
     <ion-col>
       <i class="material-icons">audiotrack</i>
       <h5>Only 1 song in the queue, let's add more!</h5>
     </ion-col>
   </ion-row>
+
+
 
   <ion-list>
     <ion-item *ngFor="let video of room.queue">
@@ -48,7 +80,7 @@
               <h2 class="overflow">{{video.title}}</h2>
               <span class="muted small">{{video.duration | VideoDurationPipe}}</span>
               <ion-row>
-                <ion-col>
+                <ion-col class="centered">
                   <img class="avatar" src="build/assets/background-landing.jpg"/>
                   <span class="muted small">{{video.channelTitle}}</span>
                 </ion-col>

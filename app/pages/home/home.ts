@@ -23,10 +23,17 @@ export class HomePage {
   room:any;
   playingVideo:any;
   player:any;
+  playerStatus: any;
+  range: number;
 
 
   constructor(private navController: NavController, private socketService: SocketService, public events: Events) {
     this.localVotes = [];
+    this.playerStatus = {
+      time: 0,
+      duration: 0
+    };
+
     this.room = this.socketService.room;
     this.playLogic();
     this.matchVotes();
@@ -72,34 +79,113 @@ export class HomePage {
       // YouTube player after the API code downloads.
       let self = this;
 
+      // https://developers.google.com/youtube/player_parameters
       this.player = new YT.Player('video', {
           autoplay: 1,
           height: '390',
           width: '640',
+          playerVars: {
+            iv_load_policy: 3,
+            rel: 0,
+            showinfo: 0,
+            playsinline: 1,
+            controls: 0,
+            disablekb: 1
+          },
           videoId: this.playingVideo.videoId,
           events: {
             'onReady': (event) =>{
               event.target.playVideo();
-          },
+              this.getDuration();
+            },
             'onStateChange': (event)=> {
+
+              let updateTimeInterval;
+              let self = this;
+              let setIntervalAndExecute = function() {
+                 updateTimeInterval = setInterval(() => {
+                   console.log('interval! updating time');
+                   self.getTime();
+                }, 500);
+              };
+
+              /**
+               YT.PlayerState.ENDED
+               YT.PlayerState.PLAYING
+               YT.PlayerState.PAUSED
+               YT.PlayerState.BUFFERING
+               YT.PlayerState.CUED
+               */
               if (event.data == YT.PlayerState.ENDED) {
                 console.log('video ended, notify server');
                 self.socketService.sendMessage("playingVideo", self.room.queue[0]);
                 console.log('start next video: ' + self.room.queue[0].title);
-                
+                clearInterval(updateTimeInterval);
+
                 this.playNextSong();
               }
-            }
+
+              if (event.data == YT.PlayerState.PLAYING) {
+                setIntervalAndExecute();
+              }
+
+              if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.BUFFERING || event.data == YT.PlayerState.CUED) {
+                clearInterval(updateTimeInterval);
+              }
+
+              }
           }
         });
       
     }
   }
 
+  public rangeChanged() {
+    let seconds = Math.floor(Number(this.getDuration()) * (this.range / 10000));
+    console.log(seconds);
+    this.seekToTime(seconds);
+  }
+
+  public togglePlayVideo() {
+    /**
+     -1 – nicht gestartet
+     0 – beendet
+     1 – wird wiedergegeben
+     2 – pausiert
+     3 – wird gepuffert
+     5 – Video positioniert
+     */
+    if (this.player.getPlayerState() === 1) {
+      this.player.pauseVideo();
+    } else {
+      this.player.playVideo();
+    }
+  }
+
+  public seekToTime(second) {
+    this.player.seekTo(second, true);
+  }
+
   public playNextSong() {
     this.playingVideo = this.room.queue[0];
     this.player.loadVideoById(this.playingVideo.videoId);
+    this.getDuration();
     this.socketService.sendMessage("playingVideo", this.playingVideo);
+  }
+
+  public getTime() {
+    this.playerStatus.time = this.player.getCurrentTime();
+    console.log('Time: '+ this.playerStatus.time);
+    console.log('Duration' + this.getDuration());
+    console.log('Percentage');
+    this.range = (this.playerStatus.time / this.getDuration()) * 10000;
+    console.log(this.range);
+    return this.playerStatus.time;
+  }
+
+  public getDuration() {
+    this.playerStatus.duration = this.player.getDuration();
+    return this.playerStatus.duration;
   }
 
   private addToLocalVotes(globalVideoId, isUpvote, callback) {

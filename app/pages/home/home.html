@@ -18,8 +18,23 @@
     </div>
 
     <div class='embed-container' *ngIf="socketService.isAdmin">
-        <div id="video"></div>
+        <ion-row >
+            <ion-col>
+                <div id="video"></div>
+            </ion-col>
+        </ion-row>
+        <ion-row class="progress">
+            <ion-col class="no-padding">
+                <ion-item>
+                    <ion-range class="no-padding" min="-200" max="200" [(ngModel)]="saturation" secondary>
+                        <ion-label class="small" text-color range-left>03:02</ion-label>
+                        <ion-label class="small" text-color range-right>04:30</ion-label>
+                    </ion-range>
+                </ion-item>
+            </ion-col>
+        </ion-row>
     </div>
+
 
     <ion-row *ngIf="playingVideo" class="player">
         <ion-col width-80>
@@ -67,7 +82,7 @@
     </ion-row>
 
 
-    <ion-list>
+    <ion-list class="content">
         <ion-item *ngFor="let video of room.queue">
             <ion-row>
                 <ion-col class="centered" width-33>

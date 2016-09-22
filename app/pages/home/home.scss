@@ -17,7 +17,7 @@
   .item-inner {
     padding-right:12px!important;
   }
-  ion-label {
+  .content ion-label {
     margin: 0;
   }
   .onboarding {
@@ -57,4 +57,15 @@
     margin: 0;
   }
   .embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+  .progress {
+    position: absolute;
+    bottom:0;
+  }
+  .progress ion-item {
+    background-color: transparent;
+  }
+  .progress .item-inner {
+    border:none;
+  }
 }

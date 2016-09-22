@@ -22,10 +22,10 @@
     </div>
 
     <ion-row *ngIf="playingVideo" class="player">
-        <ion-col width-67>
+        <ion-col width-80>
             <ion-row>
                 <ion-col>
-                    <h2 class="overflow">{{playingVideo.title}}</h2>
+                    <h3 class="overflow">{{playingVideo.title}}</h3>
                 </ion-col>
             </ion-row>
             <ion-row>
@@ -35,7 +35,7 @@
                 </ion-col>
             </ion-row>
         </ion-col>
-        <ion-col width-33 class="centered">
+        <ion-col width-20 class="centered">
             <ion-row>
                 <!-- if paused!
                 <button dark clear>

@@ -1,11 +1,29 @@
 <ion-navbar primary *navbar>
-  <ion-title>Chat</ion-title>
+    <ion-title class="playing-now">
+      <ion-row>
+          <ion-col>
+              <span>Kygo - Raging ft. Kodaline</span>
+          </ion-col>
+      </ion-row>
+    <ion-row>
+        <ion-col>
+            <span class="muted">Pascal Brun</span>
+        </ion-col>
+    </ion-row>
+    </ion-title>
     <ion-buttons end>
-        <button (click)="presentInfoModal()">
-            <ion-icon name="information-circle"></ion-icon>
+        <!-- if paused!
+           <button light>
+             <i class="material-icons">play_arrow</i>
+           </button>
+          -->
+        <button light>
+            <i class="material-icons">pause</i>
+        </button>
+        <button light (click)="playNextSong()">
+            <i class="material-icons">skip_next</i>
         </button>
     </ion-buttons>
-
 </ion-navbar>
 
 <ion-content #content padding class="chat">

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
-import { BarcodeService } from "../../providers/barcode-service";
 import { HostPartyPage } from '../host-party/host-party';
-import {Keyboard} from 'ionic-native';
+import { Keyboard } from 'ionic-native';
 
+declare var cloudSky: any;
 
 @Component({
     templateUrl: 'build/pages/landing/landing.html',
@@ -13,7 +13,7 @@ export class LandingPage {
 
     id:string;
 
-    constructor(private nav:NavController, private barcodeService:BarcodeService) {
+    constructor(private nav:NavController) {
         /*
          setTimeout(() => {
          this.beaconService.startScanning();
@@ -22,7 +22,11 @@ export class LandingPage {
     }
 
     openScanner() {
-        this.barcodeService.openScanner();
+        cloudSky.zBar.scan({}, scan => {
+            alert(scan);
+        }, err => {
+            alert(err);
+        })
     }
 
     goToHostPartyPage() {

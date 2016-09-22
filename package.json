@@ -37,7 +37,7 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard",
     "https://github.com/petermetz/cordova-plugin-ibeacon.git",
-    "libs/scandit-barcodescanner-community-phonegap_4.16.1",
+    "cordova-plugin-cszbar",
     "cordova-plugin-x-socialsharing",
     "de.appplant.cordova.plugin.local-notification"
   ],

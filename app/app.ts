@@ -4,7 +4,6 @@ import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
 import { LandingPage } from './pages/landing/landing';
 import {SocketService} from './providers/socket-service';
-import {BarcodeService} from "./providers/barcode-service";
 
 declare var evothings: any;
 
@@ -48,4 +47,4 @@ export class MyApp {
   }
 }
 
-ionicBootstrap(MyApp, [BarcodeService, SocketService], {mode:'md'});
+ionicBootstrap(MyApp, [SocketService], {mode:'md'});

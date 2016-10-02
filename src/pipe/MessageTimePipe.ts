@@ -7,7 +7,7 @@ import {Pipe} from '@angular/core';
 export class MessageTimePipe
 {
 
-  transform(value, args) {
+  transform(value, args?) {
 
     var result:string;
     // current time

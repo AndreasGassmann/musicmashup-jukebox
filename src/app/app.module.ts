@@ -13,7 +13,6 @@ import { SearchPage } from "../pages/search/search";
 import { ChatPage } from "../pages/chat/chat";
 
 import { Focuser } from "../components/focuser/focuser";
-import { QRCodeComponent } from 'ng2-qrcode';
 
 import { MessageTimePipe } from "../pipe/MessageTimePipe";
 import { VideoDurationPipe } from "../pipe/VideoDurationPipe";

@@ -24,7 +24,7 @@ export class HomePage {
   playerStatus: any;
   range: number;
 
-  constructor(private navController: NavController, private socketService: SocketService, public events: Events, public modalCtrl: ModalController) {
+  constructor(private navController: NavController, public socketService: SocketService, public events: Events, public modalCtrl: ModalController) {
     this.localVotes = [];
     this.playerStatus = {
       time: 0,

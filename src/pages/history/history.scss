@@ -1,0 +1,30 @@
+page-history {
+  .small {
+    font-size: 0.8em;
+  }
+  .avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+  }
+  .item {
+    padding-left: 8px;
+  }
+  .item-inner {
+    padding-right:12px!important;
+  }
+  ion-label {
+    margin: 0;
+  }
+  .centered{
+    display: flex;
+    align-items: center;
+  }
+  .no-search {
+    height: 100%;
+  }
+  .no-search i {
+    font-size: 10em;
+  }
+
+}

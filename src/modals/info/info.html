@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Room info
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        Cancel
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="info">
+<ion-row>
+  <ion-col text-center>
+    <h1>Room name: {{roomName}}</h1>
+  </ion-col>
+</ion-row>
+<ion-row text-center>
+  <ion-col>
+      <!--<qrcode [qrdata]="roomName" [size]="256" [level]="'M'"></qrcode>-->
+    QR
+  </ion-col>
+</ion-row>
+  <ion-row text-center>
+    <ion-col>
+      <button ion-button (click)="share()">
+        <ion-icon name="share"></ion-icon>
+        Share</button>
+    </ion-col>
+  </ion-row>
+  <ion-row text-center>
+    <ion-col>
+      <button ion-button (click)="leaveRoom()">
+        <ion-icon name="exit"></ion-icon>
+        Leave room</button>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

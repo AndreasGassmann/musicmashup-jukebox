@@ -1,0 +1,51 @@
+page-landing {
+  color:#ffffff;
+
+  background-image: url('../assets/images/background-landing.jpg');
+  background-size: cover;
+  background-position: 32%;
+  .transparent {
+    color:#ffffff!important;
+    background-color:transparent;
+  }
+  .spacing {
+    padding-top:16px;
+  }
+  .spacing-large {
+    padding-top:32px;
+  }
+  .logo {
+    height: 96px;
+    width: 96px;
+    margin-top: 16px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+  h3 {
+    font-weight:200;
+  }
+  h1 {
+    font-weight:400;
+  }
+  .end{
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .transparent {
+    color:#ffffff!important;
+    background-color:transparent;
+  }
+
+  input::-webkit-input-placeholder {
+    color:    #ffffff;
+  }
+  .input-has-focus ion-label[floating] {
+    color: color($colors, secondary);
+  }
+  .item-input.input-has-focus::after, .item-input.ng-invalid.ng-touched::after, .item-input.ng-valid.input-has-value::after, .item-input.ng-invalid.ng-touched.input-has-focus::after {
+    border-bottom-color: color($colors, secondary);
+  }
+
+}

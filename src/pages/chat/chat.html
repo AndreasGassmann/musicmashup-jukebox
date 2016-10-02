@@ -1,0 +1,112 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title class="playing-now">
+      <ion-row>
+        <ion-col>
+          <span>Kygo - Raging ft. Kodaline</span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <span class="muted">Pascal Brun</span>
+        </ion-col>
+      </ion-row>
+    </ion-title>
+    <ion-buttons end>
+      <!-- if paused!
+         <button ion-button light>
+           <i class="material-icons">play_arrow</i>
+         </button>
+        -->
+      <button ion-button light>
+        <i class="material-icons">pause</i>
+      </button>
+      <button ion-button light (click)="playNextSong()">
+        <i class="material-icons">skip_next</i>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <span *ngIf="!hasUsername">
+        <ion-row>
+            <ion-col text-center>
+                <i class="material-icons userlogin">face</i>
+            </ion-col>
+        </ion-row>
+        <ion-row text-center>
+            <p>Choose a username and you will be able to chat with your friends.</p>
+        </ion-row>
+        <ion-row>
+            <ion-col width-100>
+                <ion-item>
+                    <ion-label floating>Username</ion-label>
+                    <ion-input [(ngModel)]="userName" focuser (keyup)="onKeyUsername($event)" primary type="text"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                <button ion-button color="primary" width-100 (click)="setUsername()" >
+                    <ion-icon name="send"></ion-icon>
+                    <span>Let's chat!</span>
+                </button>
+            </ion-col>
+        </ion-row>
+    </span>
+
+    <span *ngIf="hasUsername">
+        <ion-row *ngFor="let message of messages" class="message-wrap">
+        </ion-row>
+        <div *ngFor="let message of room.messages">
+            <ion-row *ngIf="!message.isEvent" class="message-wrap">
+                <ion-col width-90 offset-10 *ngIf="message.userId == socketId">
+                    <div class="triangle-right"></div>
+                    <ion-col class="message-own" >
+                        {{message.message}}
+                    </ion-col>
+                    <ion-col offset-50>
+                        <span class="muted small">{{message.userName}}, {{message.timestamp | MessageTimePipe}}</span>
+                    </ion-col>
+                </ion-col>
+
+                <ion-col width-10 *ngIf="message.userId !== socketId">
+                    <ion-icon class="avatar" name="person"></ion-icon>
+                </ion-col>
+                <ion-col width-90 *ngIf="message.userId !== socketId">
+                    <div class="triangle-left"></div>
+                    <ion-col class="message" >
+                        {{message.message}}
+                    </ion-col>
+                    <ion-col>
+                        <span class="muted small">{{message.userName}}, {{message.timestamp | MessageTimePipe}}</span>
+                    </ion-col>
+                </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="message.isEvent" class="events message-wrap" >
+                <span>{{message.userName}}</span>
+                <span class="muted">{{message.action}}</span>
+                <span primary class="overflow-large event-text">{{message.videoName}}</span>
+            </ion-row>
+        </div>
+    </span>
+
+</ion-content>
+
+<ion-footer *ngIf="hasUsername" keyboard-attach class="bar-stable item-input-inset">
+    <ion-row>
+        <ion-col width-80>
+            <ion-label class="item-input-wrapper">
+                <ion-input class="input-msg" focuser type="text" placeholder="Type your message" [(ngModel)]="message" (keyup)="onKey($event)">
+                    </ion-input>
+            </ion-label>
+        </ion-col>
+        <ion-col width-20>
+            <button ion-button class="button button-clear" (click)="sendMessage()">
+                <ion-icon name="send"></ion-icon>
+            </button>
+        </ion-col>
+    </ion-row>
+</ion-footer>

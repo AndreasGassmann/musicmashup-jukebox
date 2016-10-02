@@ -1,0 +1,134 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Home
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="presentInfoModal()">
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <div class="onboarding" *ngIf="room && room.queue.length == 0 && !playingVideo">
+        <ion-row width-100>
+            <ion-col class="onboarding-center" text-center>
+                <h5>Start adding songs to the queue<br> and enjoy music with your friends.</h5>
+            </ion-col>
+        </ion-row>
+    </div>
+
+    <div class='embed-container' *ngIf="socketService.isAdmin">
+        <ion-row >
+            <ion-col>
+                <div id="video"></div>
+            </ion-col>
+        </ion-row>
+        <ion-row class="progress">
+            <ion-col class="no-padding">
+                <ion-item>
+                    <ion-range class="no-padding" min="0" max="10000" [(ngModel)]="range" (mouseup)="rangeChanged()" secondary>
+                        <ion-label class="small" text-color range-left>{{playerStatus.time | VideoDurationPipe}}</ion-label>
+                        <ion-label class="small" text-color range-right>{{playerStatus.duration | VideoDurationPipe}}</ion-label>
+                    </ion-range>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </div>
+
+
+    <ion-row *ngIf="playingVideo" class="player">
+        <ion-col width-80>
+            <ion-row>
+                <ion-col>
+                    <h3 class="overflow">{{playingVideo.title}}</h3>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col class="centered">
+                    <img class="avatar" src="assets/images/background-landing.jpg"/>
+                    <span class="muted small">Pascal Brun</span>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+        <ion-col width-20 class="centered">
+            <ion-row>
+                <!-- if paused!
+                <button dark clear>
+                  <i class="material-icons">play_arrow</i>
+                </button>
+               -->
+                <button dark clear (click)="togglePlayVideo()">
+                    <i class="material-icons">pause</i>
+                </button>
+                <button dark clear (click)="playNextSong()">
+                    <i class="material-icons">skip_next</i>
+                </button>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+    <!--
+    <div ngIf="!playingVideo" *ngFor="let item of room.history;  let i=index">
+      <div *ngIf="i<2">
+        {{item.title}}
+      </div>
+    </div>
+  -->
+
+    <ion-row *ngIf="room.queue.length == 0 && playingVideo" class="no-search muted" text-center>
+        <ion-col>
+            <i class="material-icons">audiotrack</i>
+            <h5>Only 1 song in the queue, let's add more!</h5>
+        </ion-col>
+    </ion-row>
+
+
+    <ion-list class="content">
+        <ion-item *ngFor="let video of room.queue">
+            <ion-row>
+                <ion-col class="centered" width-33>
+                    <img src="{{video.thumbUrl}}"/>
+                </ion-col>
+                <ion-col width-67>
+                    <ion-row class="centered">
+                        <ion-col width-90>
+                            <h2 class="overflow">{{video.title}}</h2>
+                            <span class="muted small">{{video.duration | VideoDurationPipe}}</span>
+                            <ion-row>
+                                <ion-col class="centered">
+                                    <img class="avatar" src="assets/images/background-landing.jpg"/>
+                                    <span class="muted small">{{video.channelTitle}}</span>
+                                </ion-col>
+                            </ion-row>
+                        </ion-col>
+                        <ion-col text-center width-10>
+                            <ion-col>
+                                <ion-icon name="thumbs-up"
+                                          [ngStyle]="{'color': video.hasOwnVote && video.ownIsUpvote ? '#F44336' : 'black'}"
+                                          (click)="voteUp(video)"></ion-icon>
+                            </ion-col>
+                            <ion-col>
+                                <span [ngStyle]="{'color': video.hasOwnVote ? '#F44336' : 'black'}">{{video.voteCount}}</span>
+                            </ion-col>
+                            <ion-col>
+                                <ion-icon name="thumbs-down"
+                                          [ngStyle]="{'color': video.hasOwnVote && !video.ownIsUpvote? '#F44336' : 'black'}"
+                                          (click)="voteDown(video)"></ion-icon>
+                            </ion-col>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-list>
+
+  <ion-fab bottom right>
+    <button ion-fab color="secondary" (click)="goToSearchPage()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
+</ion-content>

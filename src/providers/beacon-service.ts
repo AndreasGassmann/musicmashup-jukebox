@@ -1,7 +1,5 @@
 import { Injectable, forwardRef, Inject } from '@angular/core';
-import { IBeacon } from 'ionic-native';
-import { Delegate, BeaconRegion } from "ionic-native/dist/index";
-import { LocalNotifications } from 'ionic-native';
+import { Delegate, BeaconRegion, IBeacon, LocalNotifications } from "ionic-native";
 import { SocketService } from "./socket-service";
 declare var cordova: any;
 

@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Keyboard } from 'ionic-native';
+import { Keyboard, ZBar } from "ionic-native";
 import { LoadingPage } from "../loading/loading";
-
-declare var cloudSky: any;
 
 @Component({
   selector: 'page-landing',
@@ -17,13 +15,13 @@ export class LandingPage {
     constructor(private nav:NavController) { }
 
     openScanner() {
-        cloudSky.zBar.scan({}, scan => {
+       ZBar.scan({}).then(scan => {
           this.nav.setRoot(LoadingPage, {
             id: scan
           });
-        }, err => {
+        }).catch(err => {
             alert(err);
-        })
+        });
     }
 
     goToHostPartyPage() {

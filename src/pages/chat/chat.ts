@@ -1,8 +1,7 @@
 import { Component, AfterViewChecked, ViewChild, OnInit } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { Content, NavController, ModalController } from 'ionic-angular';
 import { SocketService } from "../../providers/socket-service";
 import { InfoModal } from "../../modals/info/info";
-import { Content } from "ionic-angular/index";
 
 @Component({
   selector: 'page-chat',

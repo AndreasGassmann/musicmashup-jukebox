@@ -1,0 +1,16 @@
+now-playing-header {
+  .muted {
+    color: color($colors, muted);
+  }
+
+  .playing-now .toolbar-title {
+    font-size: 1em;
+    ion-col {
+      padding:0;
+    }
+    .muted {
+      color: rgba(255,255,255,0.8);
+    }
+  }
+}
+

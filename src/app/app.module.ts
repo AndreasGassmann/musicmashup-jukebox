@@ -13,6 +13,7 @@ import { SearchPage } from "../pages/search/search";
 import { ChatPage } from "../pages/chat/chat";
 
 import { Focuser } from "../components/focuser/focuser";
+import { NowPlayingHeader } from "../components/now-playing-header/now-playing-header";
 
 import { MessageTimePipe } from "../pipe/MessageTimePipe";
 import { VideoDurationPipe } from "../pipe/VideoDurationPipe";
@@ -33,6 +34,7 @@ import { YoutubeService } from "../providers/youtube-service";
     LoadingPage,
     SearchPage,
     Focuser,
+    NowPlayingHeader,
     //QRCodeComponent,
     MessageTimePipe,
     VideoDurationPipe
@@ -53,7 +55,7 @@ import { YoutubeService } from "../providers/youtube-service";
     SearchPage
   ],
   providers: [
-    BeaconService,
+    //BeaconService,
     SocketService,
     YoutubeService
   ]

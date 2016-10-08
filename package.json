@@ -18,10 +18,11 @@
     "ionic-native": "^2.1.7",
     "ionicons": "^3.0.0",
     "ng2-qrcode": "^0.1.1",
-    "socket.io-client": "^1.4.8"
+    "socket.io-client": "^1.5.0"
   },
   "devDependencies": {
     "@ionic/app-scripts": "latest",
+    "@types/socket.io-client": "1.4.27",
     "typescript": "^2.0.3"
   },
   "cordovaPlugins": [

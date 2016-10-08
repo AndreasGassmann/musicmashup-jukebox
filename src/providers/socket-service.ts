@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Events } from 'ionic-angular';
 
-//import * as io from 'socket.io-client';
-
-declare var io: any;
+import io from 'socket.io-client';
+export interface MMSocket extends SocketIOClient.Socket {
+  isAdmin?: boolean; // Change to data
+}
 
 @Injectable()
 export class SocketService {
     socketObserver: any;
     socketService: any;
-    socket: any;
+    socket: MMSocket;
     user: any;
     data: any = null;
     socketHost: string = 'http://92.51.135.50:8080/';

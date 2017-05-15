@@ -12,13 +12,14 @@ import { LoadingPage } from "../pages/loading/loading";
 import { SearchPage } from "../pages/search/search";
 import { ChatPage } from "../pages/chat/chat";
 
+//import { QRCodeComponent } from "ng2-qrcode";
+
 import { Focuser } from "../components/focuser/focuser";
 import { NowPlayingHeader } from "../components/now-playing-header/now-playing-header";
 
 import { MessageTimePipe } from "../pipe/MessageTimePipe";
 import { VideoDurationPipe } from "../pipe/VideoDurationPipe";
 
-import { BeaconService } from "../providers/beacon-service";
 import { SocketService } from "../providers/socket-service";
 import { YoutubeService } from "../providers/youtube-service";
 

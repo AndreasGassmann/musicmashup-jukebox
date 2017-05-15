@@ -13,8 +13,8 @@ export class YoutubeService {
             let params:URLSearchParams = new URLSearchParams();
             params.set('key', "AIzaSyCY6vunaNGae5ava4cmofVIq96Lre8YgOc");
             params.set('type', "video");
-            params.set('videoEmbeddable', "true");
-            params.set('videoSyndicated', "true");
+            //params.set('videoEmbeddable', "true");
+            //params.set('videoSyndicated', "true");
             params.set('videoCategoryId', "10"); // only music videos
             params.set('maxResults', "30");
             params.set('part', "id");

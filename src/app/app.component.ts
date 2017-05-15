@@ -15,51 +15,55 @@ export class MyApp {
   constructor(platform: Platform, public _socketService: SocketService) {
     platform.ready().then(() => {
 
-      ThreeDeeTouch.isAvailable().then(isAvailable => console.log("3D Touch available? " + isAvailable));
+      if (platform.is('cordova')) {
+        ThreeDeeTouch.isAvailable().then(isAvailable => console.log("3D Touch available? " + isAvailable));
 
-      ThreeDeeTouch.watchForceTouches()
-        .subscribe(
-          (data: ThreeDeeTouchForceTouch) => {
-            console.log("Force touch %" + data.force);
-            console.log("Force touch timestamp: " + data.timestamp);
-            console.log("Force touch x: " + data.x);
-            console.log("Force touch y: " + data.y);
+        ThreeDeeTouch.watchForceTouches()
+          .subscribe(
+            (data: ThreeDeeTouchForceTouch) => {
+              console.log("Force touch %" + data.force);
+              console.log("Force touch timestamp: " + data.timestamp);
+              console.log("Force touch x: " + data.x);
+              console.log("Force touch y: " + data.y);
+            }
+          );
+
+        let actions: Array<ThreeDeeTouchQuickAction> = [
+          {
+            type: 'checkin',
+            title: 'Check in',
+            subtitle: 'Quickly check in',
+            iconType: 'Compose'
+          },
+          {
+            type: 'share',
+            title: 'Share',
+            subtitle: 'Share like you care',
+            iconType: 'Share'
+          },
+          {
+            type: 'search',
+            title: 'Search',
+            iconType: 'Search'
+          },
+          {
+            type: 'test',
+            title: 'Show favorites',
+            iconType: 'HeartTemplate'
           }
-        );
+        ];
+        ThreeDeeTouch.configureQuickActions(actions);
 
-      let actions: Array<ThreeDeeTouchQuickAction> = [
-        {
-          type: 'checkin',
-          title: 'Check in',
-          subtitle: 'Quickly check in',
-          iconType: 'Compose'
-        },
-        {
-          type: 'share',
-          title: 'Share',
-          subtitle: 'Share like you care',
-          iconType: 'Share'
-        },
-        {
-          type: 'search',
-          title: 'Search',
-          iconType: 'Search'
-        },
-        {
-          type: 'test',
-          title: 'Show favorites',
-          iconType: 'HeartTemplate'
-        }
-      ];
-      ThreeDeeTouch.configureQuickActions(actions);
+        ThreeDeeTouch.onHomeIconPressed().subscribe(
+          (payload) => {
+            // returns an object that is the button you presed
+            console.log('Pressed the ${payload.title} button');
+            console.log(payload.type);
 
-      ThreeDeeTouch.onHomeIconPressed().subscribe(
-        (payload) => {
-          // returns an object that is the button you presed
-          console.log('Pressed the ${payload.title} button');
-          console.log(payload.type);
+          });
 
-        });
+      }
+
 
       this._socketService.initialize();
       this._socketService.socketService.subscribe(event => {

@@ -3,7 +3,7 @@ import { NavController, ModalController } from 'ionic-angular';
 import { InfoModal } from "../../modals/info/info";
 import { SearchPage } from "../search/search";
 import { SocketService } from "../../providers/socket-service";
-import { Events } from "ionic-angular/index";
+import { Events } from "ionic-angular";
 import { Video } from "../../classes/Video";
 
 declare var document: any;
@@ -23,6 +23,8 @@ export class HomePage {
   player: any;
   playerStatus: any;
   range: number;
+  hasPlayerStarted: boolean = false;
+  creationTime: number = Math.random();
 
   constructor(private navController: NavController, public socketService: SocketService, public events: Events, public modalCtrl: ModalController) {
     this.localVotes = [];
@@ -57,7 +59,11 @@ export class HomePage {
 
 
   public playLogic() {
-    if(this.socketService.isAdmin && this.room.queue.length > 0 && typeof this.playingVideo === 'undefined'){
+    console.log(this.creationTime);
+    console.log('starting video 2', this.hasPlayerStarted);
+    if(!this.hasPlayerStarted && this.socketService.isAdmin && this.room.queue.length > 0 && typeof this.playingVideo === 'undefined'){
+      this.hasPlayerStarted = true;
+      console.log('wtf');
 
       console.log('before init' + this.room.queue[0].title);
       this.playingVideo = this.room.queue[0];

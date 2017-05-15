@@ -1,9 +1,12 @@
 page-landing {
-  color:#ffffff;
 
-  background-image: url('../assets/images/background-landing.jpg');
-  background-size: cover;
-  background-position: 32%;
+  ion-content {
+    color:#ffffff;
+
+    background-image: url('../assets/images/background-landing.jpg');
+    background-size: cover;
+    background-position: 32%;
+  }
   .transparent {
     color:#ffffff!important;
     background-color:transparent;
